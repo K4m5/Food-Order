@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 const Login = () => {
   return (
     <div className='px-5 col-10 mx-auto'>
-    <h2 className='text-dark my-0'>Chào mừng bạn trở lại</h2>
+    <h2 className='text-dark my-0'>Chào mừng bạn trở lại ...</h2>
     <p className='text-50'>Tiếp tục đăng nhập</p>
     <form className='mt-5 mb-4'  >
       <div className='form-group'>
