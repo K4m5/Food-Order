@@ -4,8 +4,20 @@ import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import Verification from "../pages/Auth/Verification";
+import MainLayout from "../layouts/MainLayout";
+import Home from "../pages/Home/Home";
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainLayout />,
+    children:[
+      {
+        path: '/',
+        element: <Home />
+      },
+    ]
+  },
   {
     path: "/",
     element: <AuthLayout />,
