@@ -23,9 +23,9 @@ const ProfileLayout = () => {
                     </div>
                     <div className='right'>
                       <h6 className='mb-1 font-weight-bold'>
-                        Gurdeep Singh <i className='feather-check-circle text-success'></i>
+                        Đỗ Quân <i className='feather-check-circle text-success'></i>
                       </h6>
-                      <p className='text-muted m-0 small'>iamosahan@gmail.com</p>
+                      <p className='text-muted m-0 small'>abc@gmail.com</p>
                     </div>
                   </div>
                 </Link>
