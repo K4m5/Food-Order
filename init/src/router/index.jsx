@@ -6,6 +6,8 @@ import Signup from "../pages/Auth/Signup";
 import Verification from "../pages/Auth/Verification";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
+import ProfileLayout from "../layouts/ProfileLayout";
+import Profile from "../pages/User/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,17 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />
       },
+      {
+        path: '',
+        element:<ProfileLayout/>,
+        children:[
+          {
+            path: 'profile',
+            element: <Profile/>
+          }
+        ]
+      }
+
     ]
   },
   {
