@@ -3,13 +3,13 @@ import { Link, Outlet } from 'react-router-dom'
 const ProfileLayout = () => {
   return (
     <>
-      <div className='osahan-profile"'>
+      <div className='osahan-profile'>
         <div className='d-none'>
           <div className='bg-primary border-bottom p-3 d-flex align-items-center'>
             <Link className='toggle togglew toggle-2' to='#'>
               <span></span>
             </Link>
-            <h4 className='font-weight-bold m-0 text-white'>Profile</h4>
+            <h4 className='font-weight-bold m-0 text-white'>Hồ sơ</h4>
           </div>
         </div>
         <div className='container position-relative'>

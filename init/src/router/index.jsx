@@ -8,6 +8,7 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import ProfileLayout from "../layouts/ProfileLayout";
 import Profile from "../pages/User/Profile/Profile";
+import ContactUs from "../pages/Contact/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile/>
-          }
+          },         
+          {
+            path: 'contact',
+            element: <ContactUs />
+          },
         ]
       }
 
