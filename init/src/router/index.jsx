@@ -9,12 +9,18 @@ import Home from "../pages/Home/Home";
 import ProfileLayout from "../layouts/ProfileLayout";
 import Profile from "../pages/User/Profile/Profile";
 import ContactUs from "../pages/Contact/ContactUs";
+import NotFound from "../pages/Error/404";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
     children:[
+      {
+        // 404 page
+        path: '*',
+        element: <NotFound/>
+      },
       {
         path: '/',
         element: <Home />

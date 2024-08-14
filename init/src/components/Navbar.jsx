@@ -233,12 +233,12 @@ const Navbar = () => {
                     <input type='range' className='custom-range' min='0' max='100' name='minmax' />
                     <div className='form-row'>
                       <div className='form-group col-6'>
-                        <label>Min</label>
-                        <input className='form-control' placeholder='$0' type='number' />
+                        <label>Thấp nhất</label>
+                        <input className='form-control' placeholder='' type='number' />
                       </div>
                       <div className='form-group text-right col-6'>
-                        <label>Max</label>
-                        <input className='form-control' placeholder='$1,0000' type='number' />
+                        <label>Cao nhất</label>
+                        <input className='form-control' placeholder='' type='number' />
                       </div>
                     </div>
                   </div>
