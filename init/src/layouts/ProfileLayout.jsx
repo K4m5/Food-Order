@@ -87,7 +87,7 @@ const ProfileLayout = () => {
                   <Link to='faq' className='d-flex w-100 align-items-center border-bottom px-3 py-4'>
                     <div className='left mr-3'>
                       <h6 className='font-weight-bold m-0 text-dark'>
-                        <i className='feather-truck bg-danger text-white p-2 rounded-circle mr-2'></i> Hỗ trợ giao hàng
+                        <i className='feather-truck bg-danger text-white p-2 rounded-circle mr-2'></i> Câu hỏi thường gặp
                       </h6>
                     </div>
                     <div className='right ml-auto'>
@@ -254,10 +254,10 @@ const ProfileLayout = () => {
                 </div>
                 <div className="modal-footer p-0 border-0">
                     <div className="col-6 m-0 p-0">
-                        <button type="button" className="btn border-top btn-lg btn-block" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn border-top btn-lg btn-block" data-dismiss="modal">Đóng</button>
                     </div>
                     <div className="col-6 m-0 p-0">
-                        <button type="button" className="btn btn-primary btn-lg btn-block">Save changes</button>
+                        <button type="button" className="btn btn-primary btn-lg btn-block">Lưu thay đổi</button>
                     </div>
                 </div>
             </div>

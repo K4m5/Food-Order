@@ -10,6 +10,7 @@ import ProfileLayout from "../layouts/ProfileLayout";
 import Profile from "../pages/User/Profile/Profile";
 import ContactUs from "../pages/Contact/ContactUs";
 import NotFound from "../pages/Error/404";
+import Faq from "../pages/User/Faq/Faq";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             path: 'profile',
             element: <Profile/>
           },         
+          {
+            path: 'faq',
+            element: <Faq/>
+          },
           {
             path: 'contact',
             element: <ContactUs />

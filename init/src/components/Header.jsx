@@ -157,7 +157,7 @@ const Header = () => {
                       Tài khoản
                     </Link>
                     <Link className='dropdown-item' to='/faq'>
-                    Hỗ trợ giao hàng
+                    Câu hỏi thường gặp
                     </Link>
                     <Link className='dropdown-item' to='/contact'>
                       Liên hệ

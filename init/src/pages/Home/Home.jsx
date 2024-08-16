@@ -105,7 +105,7 @@ const Home = () => {
           <input
             type='text'
             className='shadow-none border-0 form-control'
-            placeholder='Search for restaurants or dishes'
+            placeholder='Tìm kiếm nhà hàng hoặc món ăn...'
           />
         </div>
       </div>
