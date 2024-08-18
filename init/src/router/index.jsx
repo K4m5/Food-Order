@@ -11,6 +11,7 @@ import Profile from "../pages/User/Profile/Profile";
 import ContactUs from "../pages/Contact/ContactUs";
 import NotFound from "../pages/Error/404";
 import Faq from "../pages/User/Faq/Faq";
+import Privacy from "../pages/User/Privacy/Privacy";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             path: 'contact',
             element: <ContactUs />
           },
+          {
+            path: 'privacy',
+            element: <Privacy/>
+          }
         ]
       }
 
