@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
-
+import { BiChevronDown, BiChevronRight, BiLockAlt, BiPhoneCall } from "react-icons/bi";
+import { BsInfoCircle, BsTruck } from "react-icons/bs";
 const ProfileLayout = () => {
   return (
     <>
@@ -87,48 +88,52 @@ const ProfileLayout = () => {
                   <Link to='faq' className='d-flex w-100 align-items-center border-bottom px-3 py-4'>
                     <div className='left mr-3'>
                       <h6 className='font-weight-bold m-0 text-dark'>
-                        <i className='feather-truck bg-danger text-white p-2 rounded-circle mr-2'></i> Câu hỏi thường gặp
+                      <BsTruck className="rounded-circle mr-2 pl-1" />
+                      Câu hỏi thường gặp
                       </h6>
                     </div>
                     <div className='right ml-auto'>
-                      <h6 className='font-weight-bold m-0'>
-                        <i className='feather-chevron-right'></i>
+                      <h6 className=' m-0'>
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
                   <Link to='contact' className='d-flex w-100 align-items-center border-bottom px-3 py-4'>
                     <div className='left mr-3'>
                       <h6 className='font-weight-bold m-0 text-dark'>
-                        <i className='feather-phone bg-primary text-white p-2 rounded-circle mr-2'></i> Liên hệ
+                      <BiPhoneCall className="  rounded-circle mr-2" />
+                      Liên hệ
                       </h6>
                     </div>
                     <div className='right ml-auto'>
-                      <h6 className='font-weight-bold m-0'>
-                        <i className='feather-chevron-right'></i>
+                      <h6 className=' m-0'>
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
                   <Link to='terms' className='d-flex w-100 align-items-center border-bottom px-3 py-4'>
                     <div className='left mr-3'>
                       <h6 className='font-weight-bold m-0 text-dark'>
-                        <i className='feather-info bg-success text-white p-2 rounded-circle mr-2'></i> Điều khoản sử dụng
+                      <BsInfoCircle className=" rounded-circle mr-2" />
+                      Điều khoản sử dụng
                       </h6>
                     </div>
                     <div className='right ml-auto'>
-                      <h6 className='font-weight-bold m-0'>
-                        <i className='feather-chevron-right'></i>
+                      <h6 className=' m-0'>
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
                   <Link to='privacy' className='d-flex w-100 align-items-center px-3 py-4'>
                     <div className='left mr-3'>
                       <h6 className='font-weight-bold m-0 text-dark'>
-                        <i className='feather-lock bg-warning text-white p-2 rounded-circle mr-2'></i> Chính sách bảo mật
+                      <BiLockAlt className=" rounded-circle mr-2" />
+                      Chính sách bảo mật
                       </h6>
                     </div>
                     <div className='right ml-auto'>
-                      <h6 className='font-weight-bold m-0'>
-                        <i className='feather-chevron-right'></i>
+                      <h6 className=' m-0'>
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
