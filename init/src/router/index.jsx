@@ -12,6 +12,7 @@ import ContactUs from "../pages/Contact/ContactUs";
 import NotFound from "../pages/Error/404";
 import Faq from "../pages/User/Faq/Faq";
 import Privacy from "../pages/User/Privacy/Privacy";
+import Term from "../pages/User/Term/Term";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
           {
             path: 'contact',
             element: <ContactUs />
+          },
+          {
+            path: 'terms',
+            element: <Term/>
           },
           {
             path: 'privacy',
