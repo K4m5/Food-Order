@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar'
 const MainLayout = () => {
   return (
     <>
-      <div className='fixed-bottom-bar'>
+      <div className="fixed-bottom-bar">
         <Header />
         <Outlet />
         <Footer />
