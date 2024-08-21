@@ -13,6 +13,7 @@ import NotFound from "../pages/Error/404";
 import Faq from "../pages/User/Faq/Faq";
 import Privacy from "../pages/User/Privacy/Privacy";
 import Term from "../pages/User/Term/Term";
+import Favorite from "../pages/Favorites/Favorite";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: 'favorites',
+        element: <Favorite/>
       },
       {
         path: '',

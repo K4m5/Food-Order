@@ -48,8 +48,8 @@ const ProfileLayout = () => {
                       <p className="small text-muted m-0">Thêm thẻ tín dụng hoặc thẻ ghi nợ</p>
                     </div>
                     <div className="right ml-auto">
-                      <h6 className="font-weight-bold m-0">
-                        <i className="feather-chevron-right"></i>
+                      <h6 className="m-0">
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
@@ -64,8 +64,8 @@ const ProfileLayout = () => {
                       <p className="small text-muted m-0">Thêm hoặc xóa địa chỉ giao hàng</p>
                     </div>
                     <div className="right ml-auto">
-                      <h6 className="font-weight-bold m-0">
-                        <i className="feather-chevron-right"></i>
+                      <h6 className="m-0">
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>
@@ -79,8 +79,8 @@ const ProfileLayout = () => {
                       <p className="small text-primary m-0">Đơn hàng của bạn</p>
                     </div>
                     <div className="right ml-auto">
-                      <h6 className="font-weight-bold m-0">
-                        <i className="feather-chevron-right"></i>
+                      <h6 className="m-0">
+                      <BiChevronRight />
                       </h6>
                     </div>
                   </Link>

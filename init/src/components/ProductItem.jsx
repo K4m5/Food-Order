@@ -44,7 +44,7 @@ const ProductItem = () => {
                 <FaRegClock className="feather-clock" />
                 15–25 min
               </span>
-              <span className="float-right text-black-50"> $500 FOR TWO</span>
+              <span className="float-right text-black-50 "> 200.000 VND</span>
             </p>
           </div>
           <div className="list-card-badge">

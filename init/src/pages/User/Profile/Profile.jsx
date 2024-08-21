@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { VscArrowRight } from "react-icons/vsc";
 
 const Profile = () => {
   return (
@@ -34,13 +35,13 @@ const Profile = () => {
           <div className="change_password my-3">
             <Link to="forgot_password" className="p-3 border rounded bg-white btn d-flex align-items-center">
               Thay đổi mật khẩu
-              <i className="feather-arrow-right ml-auto"></i>
+              <span className="ml-auto"><VscArrowRight /></span>
             </Link>
           </div>
           <div className="deactivate_account">
             <Link to="/forgot_password" className="p-3 border rounded bg-white btn d-flex align-items-center">
               Vô hiệu hóa tài khoản
-              <i className="feather-arrow-right ml-auto"></i>
+              <span className="ml-auto"><VscArrowRight /></span>
             </Link>
           </div>
         </div>

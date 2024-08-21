@@ -6,7 +6,7 @@ const Term = () => {
       <div className="osahan-privacy bg-white rounded shadow-sm p-4">
         <div id="intro" className="mb-4">
           <div className="mb-3">
-            <h2 className="h5">Chào mừng đến với Dịch vụ của chúng tôi</h2>
+            <h2 className="h5 text-primary">Chào mừng đến với Dịch vụ của chúng tôi</h2>
           </div>
 
           <p>
@@ -20,7 +20,7 @@ const Term = () => {
         </div>
         <div id="services" className="mb-4">
           <div className="mb-3">
-            <h3 className="h5">1. Sử dụng dịch vụ của chúng tôi</h3>
+            <h3 className="h5 text-primary">1. Sử dụng dịch vụ của chúng tôi</h3>
           </div>
 
           <p>Bạn phải tuân thủ mọi chính sách được cung cấp cho bạn trong Dịch vụ.</p>
@@ -30,7 +30,7 @@ const Term = () => {
           </p>
 
           <div id="personal-data" className="mb-3 active">
-            <h4 className="h6">A. Dữ liệu cá nhân mà chúng tôi thu thập về bạn.</h4>
+            <h4 className="h6 text-primary">A. Dữ liệu cá nhân mà chúng tôi thu thập về bạn.</h4>
           </div>
 
           <p>
@@ -49,7 +49,7 @@ const Term = () => {
           </p>
 
           <div id="information" className="mb-3 active">
-            <h4 className="h6">B. Thông tin mà chúng tôi tự động thu thập trên các Trang web của mình.</h4>
+            <h4 className="h6 text-primary">B. Thông tin mà chúng tôi tự động thu thập trên các Trang web của mình.</h4>
           </div>
 
           <p>
@@ -61,7 +61,7 @@ const Term = () => {
         </div>
         <div id="privacy" className="mb-4">
           <div className="mb-3">
-            <h3 className="h5">2. Quyền riêng tư và bảo vệ bản quyền</h3>
+            <h3 className="h5 text-primary">2. Quyền riêng tư và bảo vệ bản quyền</h3>
           </div>
 
           <p>
@@ -74,7 +74,7 @@ const Term = () => {
         </div>
         <div id="yourContent" className="active">
           <div className="mb-3">
-            <h3 className="h5">3. Nội dung của bạn trong các dịch vụ của chúng tôi</h3>
+            <h3 className="h5 text-primary">3. Nội dung của bạn trong các dịch vụ của chúng tôi</h3>
           </div>
 
           <p>

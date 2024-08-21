@@ -9,17 +9,17 @@ const Navbar = () => {
         <ul className="second-nav">
           <li>
             <Link to="home">
-              <i className="feather-home mr-2"></i> Trang chủ
+              Trang chủ
             </Link>
           </li>
           <li>
             <Link to="my_order">
-              <i className="feather-list mr-2"></i> Đơn hàng của tôi
+             Đơn hàng của tôi
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i className="feather-edit-2 mr-2"></i> Đăng nhập
+            Đăng nhập
             </Link>
             <ul>
               <li>
@@ -41,42 +41,42 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="favorites">
-              <i className="feather-heart mr-2"></i> Yêu thích
+             Yêu thích
             </Link>
           </li>
           <li>
             <Link to="trending">
-              <i className="feather-trending-up mr-2"></i> Xu hướng
+            Xu hướng
             </Link>
           </li>
           <li>
             <Link to="most_popular">
-              <i className="feather-award mr-2"></i> Phổ biến
+            Phổ biến
             </Link>
           </li>
           <li>
             <Link to="restaurant">
-              <i className="feather-paperclip mr-2"></i> Chi tiết
+            Chi tiết
             </Link>
           </li>
           <li>
             <Link to="checkout">
-              <i className="feather-list mr-2"></i> Thanh toán
+            Thanh toán
             </Link>
           </li>
           <li>
             <Link to="successful">
-              <i className="feather-check-circle mr-2"></i> Thành công
+            Thành công
             </Link>
           </li>
           <li>
             <Link to="map">
-              <i className="feather-map-pin mr-2"></i> Live Map
+            Live Map
             </Link>
           </li>
           <li>
             <Link to="#">
-              <i className="feather-user mr-2"></i> Người dùng
+            Người dùng
             </Link>
             <ul>
               <li>
@@ -98,7 +98,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="#">
-              <i className="feather-alert-triangle mr-2"></i> Lỗi
+            Lỗi
             </Link>
             <ul>
               <li>
