@@ -14,7 +14,6 @@ const Footer = () => {
           <div className="col selected">
             <Link to="/" className="text-danger small font-weight-bold text-decoration-none">
               <p className="h4 m-0">
-                {/* <i className="feather-home text-danger"></i> */}
                 <FiHome className="text-danger" />
               </p>
               Trang chủ

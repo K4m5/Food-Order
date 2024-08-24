@@ -14,6 +14,8 @@ import Faq from "../pages/User/Faq/Faq";
 import Privacy from "../pages/User/Privacy/Privacy";
 import Term from "../pages/User/Term/Term";
 import Favorite from "../pages/Favorites/Favorite";
+import MostPopular from "../pages/MostPopular/MostPopular";
+import Tredding from "../pages/Trending/Tredding";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: 'favorites',
         element: <Favorite/>
+      },
+      {
+        path: 'trending',
+        element: <Tredding/>
+      },
+      {
+        path: 'most_popular',
+        element: <MostPopular/>
       },
       {
         path: '',
