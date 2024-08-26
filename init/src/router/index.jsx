@@ -16,6 +16,7 @@ import Term from "../pages/User/Term/Term";
 import Favorite from "../pages/Favorites/Favorite";
 import MostPopular from "../pages/MostPopular/MostPopular";
 import Tredding from "../pages/Trending/Tredding";
+import SearchPage from "../pages/Search/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/search',
+        element: <SearchPage/>
       },
       {
         path: 'favorites',

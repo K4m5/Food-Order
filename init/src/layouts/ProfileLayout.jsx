@@ -1,6 +1,9 @@
 import { Link, Outlet } from "react-router-dom";
 import { BiChevronDown, BiChevronRight, BiLockAlt, BiPhoneCall } from "react-icons/bi";
 import { BsInfoCircle, BsTruck } from "react-icons/bs";
+import { FaRegCreditCard, FaMapLocation  } from "react-icons/fa6";
+import { FaRegCheckCircle } from "react-icons/fa";
+
 
 const ProfileLayout = () => {
   return (
@@ -25,7 +28,7 @@ const ProfileLayout = () => {
                     </div>
                     <div className="right">
                       <h6 className="mb-1 font-weight-bold">
-                        Đỗ Quân <i className="feather-check-circle text-success"></i>
+                        Đỗ Quân <FaRegCheckCircle color="green" />
                       </h6>
                       <p className="text-muted m-0 small">abc@gmail.com</p>
                     </div>
@@ -169,10 +172,10 @@ const ProfileLayout = () => {
                   <div className="col-md-12 form-group">
                     <label className="form-label">Khu vực giao hàng</label>
                     <div className="input-group">
-                      <input placeholder="" type="text" className="form-control" />
+                      <input placeholder="Điền thông tin" type="text" className="form-control" />
                       <div className="input-group-append">
                         <button type="button" className="btn btn-outline-secondary">
-                          <i className="feather-map-pin"></i>
+                        <FaMapLocation />
                         </button>
                       </div>
                     </div>
@@ -246,7 +249,7 @@ const ProfileLayout = () => {
                       <input placeholder="Số thẻ" type="number" className="form-control"/>
                       <div className="input-group-append">
                         <button type="button" className="btn btn-outline-secondary">
-                          <i className="feather-credit-card"></i>
+                        <FaRegCreditCard />
                         </button>
                       </div>
                     </div>
