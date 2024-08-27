@@ -17,60 +17,65 @@ import Favorite from "../pages/Favorites/Favorite";
 import MostPopular from "../pages/MostPopular/MostPopular";
 import Tredding from "../pages/Trending/Tredding";
 import SearchPage from "../pages/Search/SearchPage";
+import MyOrder from "../pages/User/Order/MyOrder";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     children:[
       {
         // 404 page
-        path: '*',
+        path: "*",
         element: <NotFound/>
       },
       {
-        path: '/',
+        path: "/",
         element: <Home />
       },
       {
-        path: '/search',
+        path: "/search",
         element: <SearchPage/>
       },
       {
-        path: 'favorites',
+        path: "favorites",
         element: <Favorite/>
       },
       {
-        path: 'trending',
+        path: "trending",
         element: <Tredding/>
       },
       {
-        path: 'most_popular',
+        path: "most_popular",
         element: <MostPopular/>
       },
       {
-        path: '',
+        path: "",
         element:<ProfileLayout/>,
         children:[
           {
-            path: 'profile',
+            path: "profile",
             element: <Profile/>
           },         
           {
-            path: 'faq',
+            path: "faq",
             element: <Faq/>
           },
           {
-            path: 'contact',
+            path: "contact",
             element: <ContactUs />
           },
           {
-            path: 'terms',
+            path: "terms",
             element: <Term/>
           },
           {
             path: 'privacy',
             element: <Privacy/>
+          },
+          {
+            path: "my_order",
+            element: <MyOrder/>
           }
         ]
       }

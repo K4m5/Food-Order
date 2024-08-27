@@ -3,9 +3,14 @@ import { BiChevronDown, BiChevronRight, BiLockAlt, BiPhoneCall } from "react-ico
 import { BsInfoCircle, BsTruck } from "react-icons/bs";
 import { FaRegCreditCard, FaMapLocation  } from "react-icons/fa6";
 import { FaRegCheckCircle } from "react-icons/fa";
-
+import { useState } from "react";
 
 const ProfileLayout = () => {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(!show);
+
   return (
     <>
       <div className="osahan-profile">
@@ -76,6 +81,8 @@ const ProfileLayout = () => {
                     className="d-flex align-items-center border-bottom p-3"
                     data-toggle="modal"
                     data-target="#inviteModal"
+                    to={"/my_order"}
+                    onClick={handleClose}
                   >
                     <div className="left mr-3">
                       <h6 className="font-weight-bold mb-1">Thông tin đơn hàng</h6>
@@ -83,10 +90,65 @@ const ProfileLayout = () => {
                     </div>
                     <div className="right ml-auto">
                       <h6 className="m-0">
-                      <BiChevronRight />
+                      {
+                          show ? <BiChevronDown /> : <BiChevronRight />
+                       }
                       </h6>
                     </div>
                   </Link>
+                                    {/* handle show sub menu */}
+                                    {show ? (
+                    <ul
+                      className="nav nav-tabsa custom-tabsa border-0 flex-column bg-white rounded overflow-hidden shadow-sm p-2 c-t-order"
+                      id="myTab"
+                      role="tablist"
+                    >
+                      <li className="nav-item" role="presentation">
+                        <a
+                          className="nav-link border-0 text-dark py-3 active"
+                          id="completed-tab"
+                          data-toggle="tab"
+                          href="#completed"
+                          role="tab"
+                          aria-controls="completed"
+                          aria-selected="true"
+                        >
+                          <i className=" mr-2 text-success mb-0"></i>{" "}
+                          Hoàn thành
+                        </a>
+                      </li>
+                      <li className="nav-item border-top" role="presentation">
+                        <a
+                          className="nav-link border-0 text-dark py-3"
+                          id="progress-tab"
+                          data-toggle="tab"
+                          href="#progress"
+                          role="tab"
+                          aria-controls="progress"
+                          aria-selected="false"
+                        >
+                          <i className="feather-clock mr-2 text-warning mb-0"></i>{" "}
+                          Đang xử lý
+                        </a>
+                      </li>
+                      <li className="nav-item border-top" role="presentation">
+                        <a
+                          className="nav-link border-0 text-dark py-3"
+                          id="canceled-tab"
+                          data-toggle="tab"
+                          href="#canceled"
+                          role="tab"
+                          aria-controls="canceled"
+                          aria-selected="false"
+                        >
+                          <i className="feather-x-circle mr-2 text-danger mb-0"></i>{" "}
+                          Đã hủy
+                        </a>
+                      </li>
+                    </ul>
+                  ) : null}
+
+
                   <Link to="faq" className="d-flex w-100 align-items-center border-bottom px-3 py-4">
                     <div className="left mr-3">
                       <h6 className="font-weight-bold m-0 text-dark">
