@@ -155,7 +155,8 @@ const Home = () => {
         <div className="py-3 title d-flex align-items-center">
           <h5 className="m-0">Phổ biến nhất</h5>
           <Link className="font-weight-bold ml-auto" to="most_popular">
-            26 địa điểm
+            26 địa điểm 
+           <FiChevronsRight />
           </Link>
         </div>
 
@@ -173,6 +174,7 @@ const Home = () => {
           <h5 className="m-0">Bán chạy</h5>
           <Link className="font-weight-bold ml-auto" to="#">
             26 địa điểm 
+            <FiChevronsRight />
           </Link>
         </div>
 

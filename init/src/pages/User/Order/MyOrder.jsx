@@ -60,7 +60,7 @@ const MyOrder = () => {
                                             <p className="text- font-weight-bold mb-0">Nước uốngx 4</p>
                                         </div>
                                         <div className="text-muted m-0 ml-auto mr-3 small">Tổng tiền<br/>
-                                            <span className="text-dark font-weight-bold">$12.74</span>
+                                            <span className="text-dark font-weight-bold">250.000 VND</span>
                                         </div>
                                         <div className="text-right">
                                             <a href="checkout" className="btn btn-primary mx-2 px-3">Đặt hàng lại</a>
@@ -101,7 +101,7 @@ const MyOrder = () => {
                                         </div>
                                         <div className="text-right">
                                             <a href="status_onprocess.html" className="btn btn-primary mx-2 px-3">Theo dõi</a>
-                                            <a href="contact-us.html" className="btn btn-outline-primary px-3">Hỏi đáp</a>
+                                            <a href="contact" className="btn btn-outline-primary px-3">Hỏi đáp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@ const MyOrder = () => {
                                         </div>
                                         <div className="text-right">
                                             <a href="status_onprocess.html" className="btn btn-primary mx-2 px-3">Theo dõi</a>
-                                            <a href="contact-us.html" className="btn btn-outline-primary px-3">Hỏi đáp</a>
+                                            <a href="contact" className="btn btn-outline-primary px-3">Hỏi đáp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@ const MyOrder = () => {
                                         </div>
                                         <div className="text-right">
                                             <a href="status_onprocess.html" className="btn btn-primary mx-2 px-3">Theo dõi</a>
-                                            <a href="contact-us.html" className="btn btn-outline-primary px-3">Hỏi đáp</a>
+                                            <a href="contact" className="btn btn-outline-primary px-3">Hỏi đáp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@ const MyOrder = () => {
                                             <span className="text-dark font-weight-bold">$12.74</span>
                                         </div>
                                         <div className="text-right">
-                                            <a href="contact-us.html" className="btn btn-outline-primary px-3">Hỏi đáp</a>
+                                            <a href="contact" className="btn btn-outline-primary px-3">Hỏi đáp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@ const MyOrder = () => {
                                             <span className="text-dark font-weight-bold">$12.74</span>
                                         </div>
                                         <div className="text-right">
-                                            <a href="contact-us.html" className="btn btn-outline-primary px-3">Hỏi đáp</a>
+                                            <a href="contact" className="btn btn-outline-primary px-3">Hỏi đáp</a>
                                         </div>
                                     </div>
                                 </div>

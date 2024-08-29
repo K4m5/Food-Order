@@ -18,6 +18,8 @@ import MostPopular from "../pages/MostPopular/MostPopular";
 import Tredding from "../pages/Trending/Tredding";
 import SearchPage from "../pages/Search/SearchPage";
 import MyOrder from "../pages/User/Order/MyOrder";
+import Checkout from "../pages/Check/Checkout";
+import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "checkout",
+        element: <Checkout/>
+      },
+      {
+        path: "orderSuccess",
+        element: <OrderSuccess/>
       },
       {
         path: "/search",

@@ -872,7 +872,7 @@ p {
   height: 100vh;
 }
 
-.osahan-map .bg-primary  {
+.osahan-map .bg-primary.border-bottom {
   position: absolute;
   z-index: 9;
   width: 100%;

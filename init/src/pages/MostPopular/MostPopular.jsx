@@ -44,7 +44,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -76,7 +76,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -108,7 +108,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -143,7 +143,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -175,7 +175,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -207,7 +207,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -243,7 +243,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -275,7 +275,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>
@@ -307,7 +307,7 @@ const MostPopular = () => {
                       <span className='bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2'>
                       <FaRegClock />
                       15–25 min
-                      </span>{' '}
+                      </span>
                       <span className='float-right text-black-50'> $500 FOR TWO</span>
                     </p>
                   </div>

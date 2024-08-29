@@ -26,13 +26,13 @@ const Navbar = () => {
                 <Link to="login">Đăng nhập</Link>
               </li>
               <li>
-                <Link to="signup">Đăng ký</Link>
+                <Link to="sign-up">Đăng ký</Link>
               </li>
               <li>
-                <Link to="forgot_password">Quên mật khẩu</Link>
+                <Link to="forgot">Quên mật khẩu</Link>
               </li>
               <li>
-                <Link to="verification">Xác thực</Link>
+                <Link to="verify">Xác thực</Link>
               </li>
               <li>
                 <Link to="location">Địa chỉ</Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="successful">
+            <Link to="orderSuccess">
             Thành công
             </Link>
           </li>
@@ -83,7 +83,7 @@ const Navbar = () => {
                 <Link to="profile">Tài khoản</Link>
               </li>
               <li>
-                <Link to="favorites">Hỗ trợ giao hàng</Link>
+                <Link to="faq">Câu hỏi thường gặp</Link>
               </li>
               <li>
                 <Link to="contact">Liên hệ</Link>
