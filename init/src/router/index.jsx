@@ -1,25 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 import AuthLayout from "../layouts/AuthLayout";
-import ForgotPassword from "../pages/Auth/ForgotPassword";
-import Login from "../pages/Auth/Login";
-import Signup from "../pages/Auth/Signup";
-import Verification from "../pages/Auth/Verification";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/Home/Home";
 import ProfileLayout from "../layouts/ProfileLayout";
-import Profile from "../pages/User/Profile/Profile";
-import ContactUs from "../pages/Contact/ContactUs";
-import NotFound from "../pages/Error/404";
-import Faq from "../pages/User/Faq/Faq";
-import Privacy from "../pages/User/Privacy/Privacy";
-import Term from "../pages/User/Term/Term";
-import Favorite from "../pages/Favorites/Favorite";
-import MostPopular from "../pages/MostPopular/MostPopular";
-import Tredding from "../pages/Trending/Tredding";
-import SearchPage from "../pages/Search/SearchPage";
-import MyOrder from "../pages/User/Order/MyOrder";
-import Checkout from "../pages/Check/Checkout";
-import OrderSuccess from "../pages/OrderSuccess/OrderSuccess";
+import {
+  ForgotPassword,
+  Login,
+  Signup,
+  Verification,
+  NotFound,
+  Favorite,
+  Home,
+  MostPopular,
+  Search, 
+  Tredding, 
+  ContactUs,
+  Faq, 
+  MyOrder, 
+  Privacy, 
+  Profile,
+  Term, 
+  Checkout,
+  OrderSuccess
+} from "../pages";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <SearchPage/>
+        element: <Search/>
       },
       {
         path: "favorites",
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
           },
           {
             path: "contact",
-            element: <ContactUs />
+            element: <ContactUs/>
           },
           {
             path: "terms",
