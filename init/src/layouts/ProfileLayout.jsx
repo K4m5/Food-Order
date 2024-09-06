@@ -94,10 +94,11 @@ const ProfileLayout = () => {
                           show ? <BiChevronDown /> : <BiChevronRight />
                        }
                       </h6>
+                      
                     </div>
                   </Link>
-                                    {/* handle show sub menu */}
-                                    {show ? (
+                  {/* handle show sub menu */}
+                  {show ? (
                     <ul
                       className="nav nav-tabsa custom-tabsa border-0 flex-column bg-white rounded overflow-hidden shadow-sm p-2 c-t-order"
                       id="myTab"
@@ -113,7 +114,7 @@ const ProfileLayout = () => {
                           aria-controls="completed"
                           aria-selected="true"
                         >
-                          <i className=" mr-2 text-success mb-0"></i>{" "}
+                          <i className=" mr-2 text-success mb-0"></i>
                           Hoàn thành
                         </a>
                       </li>

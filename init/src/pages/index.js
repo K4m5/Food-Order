@@ -16,8 +16,11 @@ import Profile from "./User/Profile/Profile";
 import Term from "./User/Term/Term";
 import Checkout from "./Check/Checkout";
 import OrderSuccess from "./OrderSuccess/OrderSuccess"
+import Restaurant from "./Restaurant/Restaurant";
+import Offers from "./Offers/Offers";
+import Map from "./Map/Map";
 export{
     ForgotPassword, Login, Signup, Verification, NotFound, Favorite, Home,
     MostPopular, Search, Tredding, ContactUs, Faq, MyOrder, Privacy, Profile,
-    Term, Checkout, OrderSuccess
+    Term, Checkout, OrderSuccess, Restaurant, Offers, Map
 }

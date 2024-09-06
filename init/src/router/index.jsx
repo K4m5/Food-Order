@@ -20,7 +20,10 @@ import {
   Profile,
   Term, 
   Checkout,
-  OrderSuccess
+  OrderSuccess, 
+  Restaurant, 
+  Offers, 
+  Map
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
         element: <Search/>
       },
       {
+        path: "offers",
+        element: <Offers/>
+      },
+      {
         path: "favorites",
         element: <Favorite/>
       },
@@ -60,6 +67,14 @@ const router = createBrowserRouter([
       {
         path: "most_popular",
         element: <MostPopular/>
+      },
+      {
+        path: "restaurant",
+        element: <Restaurant/>
+      },
+      {
+        path: "map",
+        element: <Map/>
       },
       {
         path: "",
