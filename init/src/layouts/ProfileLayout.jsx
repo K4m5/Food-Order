@@ -1,25 +1,35 @@
-import { Link, Outlet } from "react-router-dom";
-import { BiChevronDown, BiChevronRight, BiLockAlt, BiPhoneCall } from "react-icons/bi";
+import { useContext, useState } from "react";
+import {
+  BiChevronDown,
+  BiChevronRight,
+  BiLockAlt,
+  BiPhoneCall,
+} from "react-icons/bi";
 import { BsInfoCircle, BsTruck } from "react-icons/bs";
-import { FaRegCreditCard, FaMapLocation  } from "react-icons/fa6";
-import { FaRegCheckCircle } from "react-icons/fa";
-import { useState } from "react";
-
+import { FaBars, FaRegCheckCircle } from "react-icons/fa";
+import { FaMapLocation, FaRegCreditCard } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { Link, Outlet } from "react-router-dom";
+import { SidebarContext } from "../context/SidebarContext";
 const ProfileLayout = () => {
+ 
+  const { user } = useSelector((state) => state.user);
+  const token = localStorage.getItem("accessToken");
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(!show);
+  const { toggleSidebar } = useContext(SidebarContext);
 
   return (
     <>
       <div className="osahan-profile">
         <div className="d-none">
-          <div className="bg-primary border-bottom p-3 d-flex align-items-center">
+          <div className="bg-primary border-bottom p-3 d-flex align-items-center justify-content-between">
             <h4 className="font-weight-bold m-0 text-white">Hồ sơ</h4>
-            <Link className="toggle togglew toggle-2" to="#">
-              <span></span>
-            </Link>
+            <div onClick={toggleSidebar}>
+              <FaBars size={24} color="white" />
+            </div>
           </div>
         </div>
         <div className="container position-relative">
@@ -29,74 +39,93 @@ const ProfileLayout = () => {
                 <Link to="profile" className="">
                   <div className="d-flex align-items-center p-3">
                     <div className="left mr-3">
-                      <img alt="#" src="img/user1.jpg" className="rounded-circle" />
+                      <img
+                        alt="#"
+                        src="img/user1.jpg"
+                        className="rounded-circle"
+                      />
                     </div>
                     <div className="right">
                       <h6 className="mb-1 font-weight-bold">
-                        Đỗ Quân <FaRegCheckCircle color="green" />
+                        {user?.fullname || "Bạn chưa đăng nhập"}{" "}
+                        <FaRegCheckCircle color="green" />
                       </h6>
-                      <p className="text-muted m-0 small">abc@gmail.com</p>
+                      <p className="text-muted m-0 small">
+                        {user?.email || "Vui lòng đăng nhập "}
+                      </p>
                     </div>
                   </div>
                 </Link>
-                <div className="osahan-credits d-flex align-items-center p-3 bg-light">
-                  <p className="m-0">Tài khoản tín dụng</p>
-                  <h5 className="m-0 ml-auto text-primary">100.000 VND</h5>
-                </div>
 
                 <div className="bg-white profile-details">
-                  <Link
-                    to={"#"}
-                    data-toggle="modal"
-                    data-target="#paycard"
-                    className="d-flex w-100 align-items-center border-bottom p-3"
-                  >
-                    <div className="left mr-3">
-                      <h6 className="font-weight-bold mb-1 text-dark">Thẻ thanh toán</h6>
-                      <p className="small text-muted m-0">Thêm thẻ tín dụng hoặc thẻ ghi nợ</p>
-                    </div>
-                    <div className="right ml-auto">
-                      <h6 className="m-0">
-                      <BiChevronRight />
-                      </h6>
-                    </div>
-                  </Link>
-                  <Link
-                    to={"#"}
-                    data-toggle="modal"
-                    data-target="#modalAddress"
-                    className="d-flex w-100 align-items-center border-bottom p-3"
-                  >
-                    <div className="left mr-3">
-                      <h6 className="font-weight-bold mb-1 text-dark">Địa chỉ</h6>
-                      <p className="small text-muted m-0">Thêm hoặc xóa địa chỉ giao hàng</p>
-                    </div>
-                    <div className="right ml-auto">
-                      <h6 className="m-0">
-                      <BiChevronRight />
-                      </h6>
-                    </div>
-                  </Link>
-                  <Link
-                    className="d-flex align-items-center border-bottom p-3"
-                    data-toggle="modal"
-                    data-target="#inviteModal"
-                    to={"/my_order"}
-                    onClick={handleClose}
-                  >
-                    <div className="left mr-3">
-                      <h6 className="font-weight-bold mb-1">Thông tin đơn hàng</h6>
-                      <p className="small text-primary m-0">Đơn hàng của bạn</p>
-                    </div>
-                    <div className="right ml-auto">
-                      <h6 className="m-0">
-                      {
-                          show ? <BiChevronDown /> : <BiChevronRight />
-                       }
-                      </h6>
-                      
-                    </div>
-                  </Link>
+                  {token && (
+                    <>
+                      {/* 
+                      <Link
+                        to={"#"}
+                        data-toggle="modal"
+                        data-target="#paycard"
+                        className="d-flex w-100 align-items-center border-bottom p-3"
+                      >
+                        <div className="left mr-3">
+                          <h6 className="font-weight-bold mb-1 text-dark">
+                            Thẻ thanh toán
+                          </h6>
+                          <p className="small text-muted m-0">
+                            Thêm thẻ tín dụng hoặc thẻ ghi nợ
+                          </p>
+                        </div>
+                        <div className="right ml-auto">
+                          <h6 className="m-0">
+                            <BiChevronRight />
+                          </h6>
+                        </div>
+                      </Link>
+                       */}
+                      <Link
+                        to={"#"}
+                        data-toggle="modal"
+                        data-target="#modalAddress"
+                        className="d-flex w-100 align-items-center border-bottom p-3"
+                      >
+                        <div className="left mr-3">
+                          <h6 className="font-weight-bold mb-1 text-dark">
+                            Địa chỉ
+                          </h6>
+                          <p className="small text-muted m-0">
+                            Thêm hoặc xóa địa chỉ giao hàng
+                          </p>
+                        </div>
+                        <div className="right ml-auto">
+                          <h6 className="m-0">
+                            <BiChevronRight />
+                          </h6>
+                        </div>
+                      </Link>
+                      <Link
+                        className="d-flex align-items-center border-bottom p-3"
+                        data-toggle="modal"
+                        data-target="#inviteModal"
+                        to={"/my_order"}
+                        onClick={handleClose}
+                      >
+                        <div className="left mr-3">
+                          <h6 className="font-weight-bold mb-1">
+                            Thông tin đơn hàng
+                          </h6>
+                          <p className="small text-primary m-0">
+                            Đơn hàng của bạn
+                          </p>
+                        </div>
+                        <div className="right ml-auto">
+                          <h6 className="m-0">
+                            {show ? <BiChevronDown /> : <BiChevronRight />}
+                          </h6>
+                        </div>
+                      </Link>
+                    </>
+                  )}
+
                   {/* handle show sub menu */}
                   {show ? (
                     <ul
@@ -149,8 +178,10 @@ const ProfileLayout = () => {
                     </ul>
                   ) : null}
 
-
-                  <Link to="faq" className="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                  <Link
+                    to="faq"
+                    className="d-flex w-100 align-items-center border-bottom px-3 py-4"
+                  >
                     <div className="left mr-3">
                       <h6 className="font-weight-bold m-0 text-dark">
                         <BsTruck className="rounded-circle mr-2 pl-1" />
@@ -163,7 +194,10 @@ const ProfileLayout = () => {
                       </h6>
                     </div>
                   </Link>
-                  <Link to="contact" className="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                  <Link
+                    to="contact"
+                    className="d-flex w-100 align-items-center border-bottom px-3 py-4"
+                  >
                     <div className="left mr-3">
                       <h6 className="font-weight-bold m-0 text-dark">
                         <BiPhoneCall className="rounded-circle mr-2" />
@@ -176,7 +210,10 @@ const ProfileLayout = () => {
                       </h6>
                     </div>
                   </Link>
-                  <Link to="terms" className="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                  <Link
+                    to="terms"
+                    className="d-flex w-100 align-items-center border-bottom px-3 py-4"
+                  >
                     <div className="left mr-3">
                       <h6 className="font-weight-bold m-0 text-dark">
                         <BsInfoCircle className="rounded-circle mr-2" />
@@ -189,7 +226,10 @@ const ProfileLayout = () => {
                       </h6>
                     </div>
                   </Link>
-                  <Link to="privacy" className="d-flex w-100 align-items-center px-3 py-4">
+                  <Link
+                    to="privacy"
+                    className="d-flex w-100 align-items-center px-3 py-4"
+                  >
                     <div className="left mr-3">
                       <h6 className="font-weight-bold m-0 text-dark">
                         <BiLockAlt className="rounded-circle mr-2" />
@@ -225,7 +265,12 @@ const ProfileLayout = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Thêm địa chỉ giao hàng</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -235,10 +280,17 @@ const ProfileLayout = () => {
                   <div className="col-md-12 form-group">
                     <label className="form-label">Khu vực giao hàng</label>
                     <div className="input-group">
-                      <input placeholder="Điền thông tin" type="text" className="form-control" />
+                      <input
+                        placeholder="Điền thông tin"
+                        type="text"
+                        className="form-control"
+                      />
                       <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary">
-                        <FaMapLocation />
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary"
+                        >
+                          <FaMapLocation />
                         </button>
                       </div>
                     </div>
@@ -261,12 +313,22 @@ const ProfileLayout = () => {
                   </div>
                   <div className="mb-0 col-md-12 form-group">
                     <label className="form-label">Tên</label>
-                    <div className="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                    <div
+                      className="btn-group btn-group-toggle w-100"
+                      data-toggle="buttons"
+                    >
                       <label className="btn btn-outline-secondary active">
-                        <input type="radio" name="options" id="option1" checked /> Trang chủ
+                        <input
+                          type="radio"
+                          name="options"
+                          id="option1"
+                          checked
+                        />{" "}
+                        Trang chủ
                       </label>
                       <label className="btn btn-outline-secondary">
-                        <input type="radio" name="options" id="option2" /> Công việc
+                        <input type="radio" name="options" id="option2" /> Công
+                        việc
                       </label>
                       <label className="btn btn-outline-secondary">
                         <input type="radio" name="options" id="option3" /> Khác
@@ -278,12 +340,19 @@ const ProfileLayout = () => {
             </div>
             <div className="modal-footer p-0 border-0">
               <div className="col-6 m-0 p-0">
-              <button type="button" className="btn border-top btn-lg btn-block" data-dismiss="modal">
+                <button
+                  type="button"
+                  className="btn border-top btn-lg btn-block"
+                  data-dismiss="modal"
+                >
                   Đóng
                 </button>
               </div>
               <div className="col-6 m-0 p-0">
-                <button type="button" className="btn btn-primary btn-lg btn-block">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg btn-block"
+                >
                   Lưu thay đổi
                 </button>
               </div>
@@ -292,47 +361,101 @@ const ProfileLayout = () => {
         </div>
       </div>
       {/* paymentmodel */}
-      <div className="modal fade" id="paycard" tabIndex="-1" role="dialog" aria-labelledby="paycardLabel" aria-hidden="true">
+      <div
+        className="modal fade"
+        id="paycard"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="paycardLabel"
+        aria-hidden="true"
+      >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Thêm thẻ tín dụng/thẻ ghi nợ</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
               <h6 className="m-0">Thêm thẻ mới</h6>
-              <p className="small">CHÚ Ý: TÔI CHẤP NHẬN <span className="osahan-card ml-2 font-weight-bold">( Master Card / Visa Card )</span></p>
+              <p className="small">
+                CHÚ Ý: TÔI CHẤP NHẬN{" "}
+                <span className="osahan-card ml-2 font-weight-bold">
+                  ( Master Card / Visa Card )
+                </span>
+              </p>
               <form>
                 <div className="form-row">
                   <div className="col-md-12 form-group">
-                    <label className="form-label font-weight-bold small">Số thẻ</label>
+                    <label className="form-label font-weight-bold small">
+                      Số thẻ
+                    </label>
                     <div className="input-group">
-                      <input placeholder="Số thẻ" type="number" className="form-control"/>
+                      <input
+                        placeholder="Số thẻ"
+                        type="number"
+                        className="form-control"
+                      />
                       <div className="input-group-append">
-                        <button type="button" className="btn btn-outline-secondary">
-                        <FaRegCreditCard />
+                        <button
+                          type="button"
+                          className="btn btn-outline-secondary"
+                        >
+                          <FaRegCreditCard />
                         </button>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-8 form-group">
-                    <label className="form-label font-weight-bold small">Có hiệu lực đến hết (MM/YY)</label>
-                    <input placeholder="Nhập" type="number" className="form-control"/>
+                    <label className="form-label font-weight-bold small">
+                      Có hiệu lực đến hết (MM/YY)
+                    </label>
+                    <input
+                      placeholder="Nhập"
+                      type="number"
+                      className="form-control"
+                    />
                   </div>
                   <div className="col-md-4 form-group">
-                    <label className="form-label font-weight-bold small">CVV</label>
-                    <input placeholder="Nhập số CVV" type="number" className="form-control"/>
+                    <label className="form-label font-weight-bold small">
+                      CVV
+                    </label>
+                    <input
+                      placeholder="Nhập số CVV"
+                      type="number"
+                      className="form-control"
+                    />
                   </div>
                   <div className="col-md-12 form-group">
-                    <label className="form-label font-weight-bold small">Tên trên thẻ</label>
-                    <input placeholder="Nhập số thẻ" type="text" className="form-control"/>
+                    <label className="form-label font-weight-bold small">
+                      Tên trên thẻ
+                    </label>
+                    <input
+                      placeholder="Nhập số thẻ"
+                      type="text"
+                      className="form-control"
+                    />
                   </div>
                   <div className="col-md-12 form-group mb-0">
                     <div className="custom-control custom-checkbox">
-                      <input type="checkbox" id="custom-checkbox1" className="custom-control-input"/>
-                      <label htmlFor="custom-checkbox1" className="custom-control-label small pt-1">Hãy lưu thẻ này một cách an toàn để lần thanh toán tiếp theo được nhanh hơn.</label>
+                      <input
+                        type="checkbox"
+                        id="custom-checkbox1"
+                        className="custom-control-input"
+                      />
+                      <label
+                        htmlFor="custom-checkbox1"
+                        className="custom-control-label small pt-1"
+                      >
+                        Hãy lưu thẻ này một cách an toàn để lần thanh toán tiếp
+                        theo được nhanh hơn.
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -340,12 +463,19 @@ const ProfileLayout = () => {
             </div>
             <div className="modal-footer p-0 border-0">
               <div className="col-6 m-0 p-0">
-                <button type="button" className="btn border-top btn-lg btn-block" data-dismiss="modal">
+                <button
+                  type="button"
+                  className="btn border-top btn-lg btn-block"
+                  data-dismiss="modal"
+                >
                   Đóng
                 </button>
               </div>
               <div className="col-6 m-0 p-0">
-                <button type="button" className="btn btn-primary btn-lg btn-block">
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg btn-block"
+                >
                   Lưu thay đổi
                 </button>
               </div>
@@ -358,4 +488,3 @@ const ProfileLayout = () => {
 };
 
 export default ProfileLayout;
-

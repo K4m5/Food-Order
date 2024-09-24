@@ -1,15 +1,31 @@
- 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-const CategoryItem = () => {
+const CategoryItem = ({ category }) => {
+
   return (
-    <div className="cat-item px-1 py-3">
-      <Link className="bg-white rounded d-block p-2 text-center shadow-sm" to="trending">
-        <img alt="#" src="img/icons/Fries.png" className="img-fluid mb-2" />
-        <p className="m-0 small">Fries</p>
+    <div className="cat-item px-1 py-3" >
+      <Link
+        className="bg-white rounded d-block p-2 text-center shadow-sm"
+        to="#"
+         
+      >
+        <img
+          alt="#"
+          src={category?.image}
+          className="  mb-2"
+         
+          style={
+            {
+              objectFit: "cover",
+              height:"100px",
+              width:"100%"
+            }
+          }
+        />
+        <p className="m-0 small">{category?.name}</p>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryItem
+export default CategoryItem;

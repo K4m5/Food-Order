@@ -11,8 +11,12 @@ const Footer = () => {
     <>
       <div className="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
         <div className="row">
+           
           <div className="col selected">
-            <Link to="/" className="text-danger small font-weight-bold text-decoration-none">
+            <Link
+              to="/"
+              className="text-danger small font-weight-bold text-decoration-none"
+            >
               <p className="h4 m-0">
                 <FiHome className="text-danger" />
               </p>
@@ -20,7 +24,10 @@ const Footer = () => {
             </Link>
           </div>
           <div className="col">
-            <Link to="/most_popular" className="text-dark small font-weight-bold text-decoration-none">
+            <Link
+              to="/offers"
+              className="text-dark small font-weight-bold text-decoration-none"
+            >
               <p className="h4 m-0">
                 <LuMapPin />
               </p>
@@ -29,13 +36,19 @@ const Footer = () => {
           </div>
           <div className="col bg-white rounded-circle mt-n4 px-3 py-2">
             <div className="bg-danger rounded-circle mt-n0 shadow">
-              <Link to="/checkout" className="text-white small font-weight-bold text-decoration-none">
+              <Link
+                to="/checkout"
+                className="text-white small font-weight-bold text-decoration-none"
+              >
                 <LuShoppingCart />
               </Link>
             </div>
           </div>
           <div className="col">
-            <Link to="/favorites" className="text-dark small font-weight-bold text-decoration-none">
+            <Link
+              to="/favorites"
+              className="text-dark small font-weight-bold text-decoration-none"
+            >
               <p className="h4 m-0">
                 <FaRegHeart />
               </p>
@@ -43,7 +56,10 @@ const Footer = () => {
             </Link>
           </div>
           <div className="col">
-            <Link to="/profile" className="text-dark small font-weight-bold text-decoration-none">
+            <Link
+              to="/profile"
+              className="text-dark small font-weight-bold text-decoration-none"
+            >
               <p className="h4 m-0">
                 <LuUser />
               </p>
@@ -59,12 +75,17 @@ const Footer = () => {
               <aside className="col-md-4 footer-about">
                 <article className="d-flex pb-3">
                   <div>
-                    <img alt="#" src="img/logo_web.png" className="logo-footer mr-3" />
+                    <img
+                      alt="#"
+                      src="img/logo_web.png"
+                      className="logo-footer mr-3"
+                    />
                   </div>
                   <div>
                     <h6 className="title text-white">Liên hệ</h6>
                     <p className="text-muted">
-                      Đây là trang web cho phép mọi người có thể mua sắm đồ ăn uống
+                      Đây là trang web cho phép mọi người có thể mua sắm đồ ăn
+                      uống
                     </p>
                     <div className="d-flex align-items-center">
                       <Link
@@ -128,7 +149,7 @@ const Footer = () => {
                 <ul className="list-unstyled hov_footer">
                   <li>
                     <Link to="/faq" className="text-muted">
-                       Hỗ trợ giao hàng
+                      Hỗ trợ giao hàng
                     </Link>
                   </li>
                   <li>
@@ -178,7 +199,7 @@ const Footer = () => {
                 <ul className="list-unstyled hov_footer">
                   <li>
                     <Link to="trending" className="text-muted">
-                    Xu hướng
+                      Xu hướng
                     </Link>
                   </li>
                   <li>
@@ -276,7 +297,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link to="#" className="text-muted">
-                    Canada
+                      Canada
                     </Link>
                   </li>
                   <li>

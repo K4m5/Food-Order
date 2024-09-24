@@ -1,12 +1,38 @@
+import { useContext, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
+import { FaBars } from "react-icons/fa6";
 import { FiDisc } from "react-icons/fi";
 import { IoNavigate, IoSearchOutline } from "react-icons/io5";
 import { LuUser } from "react-icons/lu";
 import { RiMapPinLine, RiShoppingCartLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { SidebarContext } from "../context/SidebarContext";
+import { userProfile } from "../features/user/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  const token = localStorage.getItem("accessToken");
+   const { isActive ,toggleSidebar} = useContext(SidebarContext);
+
+  useEffect(() => {
+    if (token) {
+      console.log(123);
+      dispatch(userProfile(token));
+    }
+  }, [dispatch, token, navigate]);
+  useEffect(() => {}, [dispatch, user]);
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    navigate("/login");
+  };
+  
+
   return (
+    <>
     <header className="section-header">
       <section className="header-main shadow-sm bg-white">
         <div className="container">
@@ -168,62 +194,69 @@ const Header = () => {
                   </div>
                 </Link>
 
-                <Link to="/offers" className="widget-header mr-4 text-white btn bg-primary m-none">
+                <Link
+                  to="/offers"
+                  className="widget-header mr-4 text-white btn bg-primary m-none"
+                >
                   <div className="icon d-flex align-items-center">
                     <FiDisc className="h6 mr-2 mb-0" />
 
                     <span>Ưu đãi</span>
                   </div>
                 </Link>
-
-                <Link to="/login" className="widget-header mr-4 text-dark m-none">
-                  <div className="icon d-flex align-items-center">
-                    <LuUser className="h6 mr-2 mb-0" />
-
-                    <span>Đăng nhập</span>
-                  </div>
-                </Link>
-
-                <div className="dropdown mr-4 m-none">
+                {token == null ? (
                   <Link
-                    to="#"
-                    className="dropdown-toggle text-dark py-3 d-block"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    to="/login"
+                    className="widget-header mr-4 text-dark m-none"
                   >
-                    <img
-                      alt="#"
-                      src="img/user/1.jpg"
-                      className="img-fluid rounded-circle header-user mr-2 header-user"
-                    />
-                    Hi Đỗ Quân
+                    <div className="icon d-flex align-items-center">
+                      <LuUser className="h6 mr-2 mb-0" />
+
+                      <span>Đăng nhập</span>
+                    </div>
                   </Link>
-                  <div
-                    className="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <Link className="dropdown-item" to="/profile">
-                      Tài khoản
+                ) : (
+                  <div className="dropdown mr-4 m-none">
+                    <Link
+                      to="#"
+                      className="dropdown-toggle text-dark py-3 d-block"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <img
+                        alt="#"
+                        src="img/user/1.jpg"
+                        className="img-fluid rounded-circle header-user mr-2 header-user"
+                      />
+                      {user?.fullname || ""}{" "}
                     </Link>
-                    <Link className="dropdown-item" to="/faq">
-                      Câu hỏi thường gặp
-                    </Link>
-                    <Link className="dropdown-item" to="/contact">
-                      Liên hệ
-                    </Link>
-                    <Link className="dropdown-item" to="/terms">
-                      Điều khoản sử dụng
-                    </Link>
-                    <Link className="dropdown-item" to="/privacy">
-                      Chính sách bảo mật
-                    </Link>
-                    <Link className="dropdown-item" to="/login">
-                      Đăng xuất
-                    </Link>
+                    <div
+                      className="dropdown-menu dropdown-menu-right"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <Link className="dropdown-item" to="/profile">
+                        Tài khoản
+                      </Link>
+                      <Link className="dropdown-item" to="/faq">
+                        Câu hỏi thường gặp
+                      </Link>
+                      <Link className="dropdown-item" to="/contact">
+                        Liên hệ
+                      </Link>
+                      <Link className="dropdown-item" to="/terms">
+                        Điều khoản sử dụng
+                      </Link>
+                      <Link className="dropdown-item" to="/privacy">
+                        Chính sách bảo mật
+                      </Link>
+                      <button className="dropdown-item" onClick={logout}>
+                        Đăng xuất
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <Link to="/checkout" className="widget-header mr-4 text-dark">
                   <div className="icon d-flex align-items-center">
@@ -232,15 +265,19 @@ const Header = () => {
                     <span>Giỏ hàng</span>
                   </div>
                 </Link>
-                <Link className="toggle" to="#" role="button" aria-controls="hc-nav-1">
-                  <span></span>
-                </Link>
+                <div onClick={toggleSidebar}    >
+                  <FaBars size={24} />
+                </div>
+                 
               </div>
             </div>
           </div>
         </div>
       </section>
     </header>
+    {isActive && <div className="overlay" onClick={toggleSidebar}></div>}
+
+    </>
   );
 };
 

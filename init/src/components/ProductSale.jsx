@@ -1,4 +1,4 @@
-import { FaRegClock, FaRegHeart, FaRegStar } from "react-icons/fa";
+import { FaRegClock, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const ProductSale = () => {
@@ -18,11 +18,11 @@ const ProductSale = () => {
             3.1 (300+)
           </span>
         </div>
-        <div className="favourite-heart text-danger position-absolute">
+        {/* <div className="favourite-heart text-danger position-absolute">
           <Link to="#">
             <FaRegHeart className="feather-heart" />
           </Link>
-        </div>
+        </div> */}
         <div className="member-plan position-absolute">
           <span className="badge badge-dark">Promoted</span>
         </div>

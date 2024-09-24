@@ -6,12 +6,18 @@ const ForgotPassword = () => {
       <div className="px-5 col-10 mx-auto">
         <h2>Quên mật khẩu</h2>
         <p>
-          Nhập địa chỉ email của bạn bên dưới và chúng tôi sẽ gửi cho bạn một email kèm theo hướng dẫn về cách thay đổi mật khẩu của bạn
+          Nhập địa chỉ email của bạn bên dưới và chúng tôi sẽ gửi cho bạn một
+          email kèm theo hướng dẫn về cách thay đổi mật khẩu của bạn
         </p>
         <form className="mt-5 mb-4">
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
           </div>
           <button className="btn btn-primary btn-lg btn-block">Gửi</button>
         </form>

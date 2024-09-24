@@ -3,111 +3,110 @@ import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
 import ProfileLayout from "../layouts/ProfileLayout";
 import {
-  ForgotPassword,
-  Login,
-  Signup,
-  Verification,
-  NotFound,
-  Favorite,
-  Home,
-  MostPopular,
-  Search, 
-  Tredding, 
-  ContactUs,
-  Faq, 
-  MyOrder, 
-  Privacy, 
-  Profile,
-  Term, 
   Checkout,
-  OrderSuccess, 
-  Restaurant, 
-  Offers, 
-  Map
+  ContactUs,
+  Faq,
+  Favorite,
+  Foods,
+  ForgotPassword,
+  Home,
+  Login,
+  Map,
+  MostPopular,
+  MyOrder,
+  NotFound,
+  Offers,
+  OrderSuccess,
+  Privacy,
+  Profile,
+  Search,
+  Signup,
+  Term,
+  Tredding,
+  Verification,
 } from "../pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    children:[
+    children: [
       {
         // 404 page
         path: "*",
-        element: <NotFound/>
+        element: <NotFound />,
       },
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "checkout",
-        element: <Checkout/>
+        element: <Checkout />,
       },
       {
         path: "orderSuccess",
-        element: <OrderSuccess/>
+        element: <OrderSuccess />,
       },
       {
         path: "/search",
-        element: <Search/>
+        element: <Search />,
       },
       {
         path: "offers",
-        element: <Offers/>
+        element: <Offers />,
       },
       {
         path: "favorites",
-        element: <Favorite/>
+        element: <Favorite />,
       },
       {
         path: "trending",
-        element: <Tredding/>
+        element: <Tredding />,
       },
       {
         path: "most_popular",
-        element: <MostPopular/>
+        element: <MostPopular />,
       },
       {
-        path: "restaurant",
-        element: <Restaurant/>
+        path: "foods/:id",
+        element: <Foods />,
       },
       {
         path: "map",
-        element: <Map/>
+        element: <Map />,
       },
       {
         path: "",
-        element:<ProfileLayout/>,
-        children:[
+        element: <ProfileLayout />,
+        children: [
           {
             path: "profile",
-            element: <Profile/>
-          },         
+            element: <Profile />,
+          },
           {
             path: "faq",
-            element: <Faq/>
+            element: <Faq />,
           },
           {
             path: "contact",
-            element: <ContactUs/>
+            element: <ContactUs />,
           },
           {
             path: "terms",
-            element: <Term/>
+            element: <Term />,
           },
           {
-            path: 'privacy',
-            element: <Privacy/>
+            path: "privacy",
+            element: <Privacy />,
           },
           {
             path: "my_order",
-            element: <MyOrder/>
-          }
-        ]
-      }
-
-    ]
+            element: <MyOrder />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/",
@@ -122,7 +121,7 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: "/forgot",
+        path: "/forgot_password",
         element: <ForgotPassword />,
       },
       {

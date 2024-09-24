@@ -1,22 +1,57 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { userLogin } from "../../features/auth/authApiSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken");
+  const { user } = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data)
+    dispatch(userLogin(data));
+  };
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   return (
     <div className="px-5 col-10 mx-auto">
       <h2 className="text-dark my-0">Chào mừng bạn trở lại ...</h2>
       <p className="text-50">Tiếp tục đăng nhập</p>
-      <form className="mt-5 mb-4">
+      <form className="mt-5 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1" className="text-dark">
-            Email
+          <label htmlFor="username" className="text-dark">
+            Username
           </label>
           <input
-            type="email"
-            placeholder="Enter Email"
+            type="text"
+            placeholder="Enter username"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            id="username"
+            aria-describedby="usernameHelp"
+            
+            {...register("username", {
+              required: "Vui lòng nhập username",
+            })}
           />
+          {errors.username && (
+            <span className="error-message">{errors.username.message}</span>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1" className="text-dark">
@@ -27,16 +62,26 @@ const Login = () => {
             placeholder="Enter Password"
             className="form-control"
             id="exampleInputPassword1"
+            name="password"
+            {...register("password", {
+              required: "Vui lòng nhập mật khẩu > 6",
+              minLength: 6,
+            })}
           />
+          {errors.password && (
+            <span className="error-message">{errors.password.message}</span>
+          )}
         </div>
-        <button className="btn btn-primary btn-lg btn-block">Đăng nhập</button>
+        <button className="btn btn-primary btn-lg btn-block" type="submit">
+          Đăng nhập
+        </button>
         <div className="py-2">
           <button className="btn btn-lg btn-facebook btn-block">
             <i className="feather-facebook"></i> Đăng nhập với Facebook
           </button>
         </div>
       </form>
-      <Link to={"/forgot"} className="text-decoration-none">
+      <Link to={"/forgot_password"} className="text-decoration-none">
         <p className="text-center">Quên mật khẩu?</p>
       </Link>
       <div className="d-flex align-items-center justify-content-center">

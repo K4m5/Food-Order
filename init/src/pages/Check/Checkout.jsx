@@ -1,10 +1,98 @@
-import React from "react";
-import { FaMinus, FaPlus  } from "react-icons/fa";
-import { FaRegCreditCard, FaAnglesDown  } from "react-icons/fa6";
+import React, { Fragment, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { CiBank, CiDollar } from "react-icons/ci";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { FaAnglesDown, FaPercent, FaRegCreditCard } from "react-icons/fa6";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import baseApi from "../../api/baseApi";
+import {
+  clearCart,
+  fetchCartItems,
+  removeItemFromCart,
+  updateCartItem,
+} from "../../features/cart/cartSlice";
+import { fetchCoupons } from "../../features/coupons/couponSlice";
+import { formatMoney } from "../../utils/formatMoney";
 
 function Checkout() {
+  const { items } = useSelector((state) => state.cart);
+  const { coupons } = useSelector((state) => state.coupons);
+  const dispatch = useDispatch();
+  const [discount, setDiscount] = useState(0);
+  const [discountCode, setDiscountCode] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchCartItems());
+  }, [dispatch, items]);
+  useEffect(() => {
+    dispatch(fetchCoupons(123));
+  }, [dispatch]);
+
+  const handleRemoveItem = (id) => {
+    dispatch(removeItemFromCart(id));
+  };
+
+  const handleUpdateQuantity = (id, quantity) => {
+    dispatch(updateCartItem({ id, quantity }));
+  };
+  // random code
+  const handleApplyDiscount = () => {
+    // kiểm tra xem có mã giảm giá nào được nhập không
+    // nếu không thì thông báo lỗi
+    if (!discountCode) {
+      toast.error("Vui lòng nhập mã giảm giá");
+      return;
+    }
+
+    console.log(coupons);
+    const coupon = coupons.find(
+      (coupon) => coupon.code.toString() == discountCode.toString()
+    );
+
+    if (!coupon) {
+      toast.error("Mã giảm giá không tồn tại");
+      return;
+    } else {
+      toast.success("Áp dụng mã giảm giá thành công");
+    }
+    // nếu mã giảm giá tồn tại thì cập nhật giảm giá
+
+    setDiscount(coupon.value);
+  };
+  const calculateTotal = () => {
+    const total = items.reduce((total, cart) => {
+      const foodPrice = cart.food.price * cart.quantity;
+      const toppingPrice = cart.toppings.reduce(
+        (toppingTotal, topping) => toppingTotal + topping.price,
+        0
+      );
+      return total + foodPrice + toppingPrice;
+    }, 0);
+
+    return total - (total * discount) / 100;
+  };
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const orderData = {
+        items,
+        total: calculateTotal(),
+        discountCode,
+      };
+      await baseApi.post("/orders", orderData);
+      toast.success("Thanh toán thành công!");
+      dispatch(clearCart());
+      history.push("/order-success");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="container position-relative">
       <div className="py-5 row">
@@ -35,12 +123,8 @@ function Checkout() {
                                 Mặc định
                               </p>
                             </div>
-                            <p className="small text-muted m-0">
-                              Đại lộ...
-                            </p>
-                            <p className="small text-muted m-0">
-                              Hà Nội
-                            </p>
+                            <p className="small text-muted m-0">Đại lộ...</p>
+                            <p className="small text-muted m-0">Hà Nội</p>
                           </div>
                           <a
                             href="#"
@@ -69,15 +153,11 @@ function Checkout() {
                             <div className="d-flex align-items-center mb-2">
                               <h6 className="mb-0">Công việc</h6>
                               <p className="mb-0 badge badge-light ml-auto">
-                              Lựa chọn
+                                Lựa chọn
                               </p>
                             </div>
-                            <p className="small text-muted m-0">
-                            Đại lộ...
-                            </p>
-                            <p className="small text-muted m-0">
-                            Hà Nội
-                            </p>
+                            <p className="small text-muted m-0">Đại lộ...</p>
+                            <p className="small text-muted m-0">Hà Nội</p>
                           </div>
                           <a
                             href="#"
@@ -117,15 +197,18 @@ function Checkout() {
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      <FaRegCreditCard 
-                      style={
-                        {
-                          marginRight:"1rem"
-                        }} size={20}/>
+                      <FaRegCreditCard
+                        style={{
+                          marginRight: "1rem",
+                        }}
+                        size={20}
+                      />
                       Thẻ tín dụng/thẻ ghi nợ
-                      <FaAnglesDown style={{
-                        marginLeft:"auto"
-                      }} />
+                      <FaAnglesDown
+                        style={{
+                          marginLeft: "auto",
+                        }}
+                      />
                     </button>
                   </h2>
                 </div>
@@ -138,7 +221,7 @@ function Checkout() {
                   <div className="osahan-card-body border-top p-3">
                     <h6 className="m-0">Thêm thẻ mới</h6>
                     <p className="small">
-                    CHÚNG TÔI CHẤP NHẬN
+                      CHÚNG TÔI CHẤP NHẬN
                       <span className="osahan-card ml-2 font-weight-bold">
                         ( Master Card / Visa Card / Rupay )
                       </span>
@@ -147,7 +230,7 @@ function Checkout() {
                       <div className="form-row">
                         <div className="col-md-12 form-group">
                           <label className="form-label font-weight-bold small">
-                          Số thẻ
+                            Số thẻ
                           </label>
                           <div className="input-group">
                             <input
@@ -167,7 +250,7 @@ function Checkout() {
                         </div>
                         <div className="col-md-8 form-group">
                           <label className="form-label font-weight-bold small">
-                          Có hiệu lực đến hết (MM/YY)
+                            Có hiệu lực đến hết (MM/YY)
                           </label>
                           <input
                             placeholder="Có hiệu lực đến hết (MM/YY)"
@@ -187,7 +270,7 @@ function Checkout() {
                         </div>
                         <div className="col-md-12 form-group">
                           <label className="form-label font-weight-bold small">
-                          Tên trên thẻ
+                            Tên trên thẻ
                           </label>
                           <input
                             placeholder="Nhập số thẻ"
@@ -206,8 +289,8 @@ function Checkout() {
                               htmlFor="custom-checkbox1"
                               className="custom-control-label small pt-1"
                             >
-                              Lưu thẻ này một cách an toàn để thanh toán nhanh hơn vào lần tiếp theo
-                              thời gian.
+                              Lưu thẻ này một cách an toàn để thanh toán nhanh
+                              hơn vào lần tiếp theo thời gian.
                             </label>
                           </div>
                         </div>
@@ -228,13 +311,18 @@ function Checkout() {
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      <CiBank style={{
-                        marginRight: "1rem"
-                      }} size={20}/>
+                      <CiBank
+                        style={{
+                          marginRight: "1rem",
+                        }}
+                        size={20}
+                      />
                       Ngân hàng
-                      <FaAnglesDown style={{
-                        marginLeft:"auto"
-                      }} />
+                      <FaAnglesDown
+                        style={{
+                          marginLeft: "auto",
+                        }}
+                      />
                     </button>
                   </h2>
                 </div>
@@ -287,7 +375,7 @@ function Checkout() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="osahan-card bg-white overflow-hidden">
                 <div className="osahan-card-header" id="headingThree">
                   <h2 className="mb-0">
@@ -299,13 +387,18 @@ function Checkout() {
                       aria-expanded="false"
                       aria-controls="collapseThree"
                     >
-                      <CiDollar style={{
-                        marginRight:"1rem"
-                      }} size={20} />
+                      <CiDollar
+                        style={{
+                          marginRight: "1rem",
+                        }}
+                        size={20}
+                      />
                       Tiền mặt khi giao hàng
-                      <FaAnglesDown style={{
-                        marginLeft:"auto"
-                      }} />
+                      <FaAnglesDown
+                        style={{
+                          marginLeft: "auto",
+                        }}
+                      />
                     </button>
                   </h2>
                 </div>
@@ -318,7 +411,8 @@ function Checkout() {
                   <div className="border-top p-3 osahan-card-body">
                     <h6 className="mb-3 font-weight-bold">Tiền mặt</h6>
                     <p className="m-0">
-                    Vui lòng giữ sẵn số tiền lẻ chính xác để giúp chúng tôi phục vụ bạn tốt hơn
+                      Vui lòng giữ sẵn số tiền lẻ chính xác để giúp chúng tôi
+                      phục vụ bạn tốt hơn
                     </p>
                   </div>
                 </div>
@@ -326,148 +420,147 @@ function Checkout() {
             </div>
           </div>
         </div>
-
         <div className="col-md-4">
           <div className="osahan-cart-item rounded rounded shadow-sm overflow-hidden bg-white sticky_sidebar">
             <div className="d-flex border-bottom osahan-cart-item-profile bg-white p-3">
-              <img
-                alt="Generic placeholder image"
-                src="img/starter1.jpg"
-                className="mr-3 rounded-pill osahan-cart-item-profile"
-              />
-              <div className="d-flex flex-column">
-                <h6 className="mb-1 font-weight-bold">Món ăn</h6>
-                <p className="mb-0 small text-muted">
-                  Địa chỉ
-                </p>
-              </div>
+              <h5 className="font-weight-bold">Giỏ hàng của bạn</h5>
             </div>
             <div className="bg-white border-bottom py-2">
-              <div className="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                <div className="media align-items-center">
-                  <div className="mr-2 text-danger">&middot;</div>
-                  <div className="media-body">
-                    <p className="m-0">Gà Tikka Sub</p>
+              {items.map((item, index) => (
+                <Fragment key={index}>
+                  <div className="d-flex align-items-start p-3 border-bottom">
+                    <div className="mr-3">
+                      <img
+                        src={item.food.image}
+                        alt={item.food.name}
+                        className="img-fluid rounded"
+                        width="60"
+                      />
+                    </div>
+                    <div className="flex-grow-1">
+                      <h6 className="mb-1">{item.food.name}</h6>
+
+                      <p className="mb-0 text-dark">
+                        {formatMoney(item.food.price)} VND
+                      </p>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <button
+                        className="btn btn-sm btn-outline-secondary mr-2"
+                        onClick={() =>
+                          handleUpdateQuantity(item._id, item.quantity - 1)
+                        }
+                      >
+                        <FaMinus />
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        className="btn btn-sm btn-outline-secondary ml-2"
+                        onClick={() =>
+                          handleUpdateQuantity(item._id, item.quantity + 1)
+                        }
+                      >
+                        <FaPlus />
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline-danger ml-2"
+                        onClick={() => handleRemoveItem(item._id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex align-items-center">
-                  <span className="count-number float-right">
-                    <button
-                      type="button"
-                      className="btn-sm left dec btn btn-outline-secondary"
+                  {item.toppings.map((topping, i) => (
+                    <div
+                      key={i}
+                      className="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom"
                     >
-                      <FaMinus />
-                    </button>
-                    <input
-                      className="count-number-input"
-                      type="text"
-                      readOnly
-                      value="2"
-                    />
-                    <button
-                      type="button"
-                      className="btn-sm right inc btn btn-outline-secondary"
-                    >
-                      <FaPlus />
-                    </button>
-                  </span>
-                  <p className="text-gray mb-0 ml-3">45.000 VND</p>
+                      <div className="media align-items-center">
+                        <div className="mr-2">&middot;</div>
+                        <div className="media-body">
+                          <p className="m-0"> {topping.name} </p>
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <p className="text-gray mb-0 float-right ml-2 text-muted small">
+                          {formatMoney(topping.price)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </Fragment>
+              ))}
+            </div>
+            <div className="bg-white p-3 py-3 border-bottom clearfix">
+              <div className="input-group-sm mb-2 input-group">
+                <input
+                  placeholder="Nhập mã giảm giá"
+                  type="text"
+                  className="form-control"
+                  value={discountCode}
+                  onChange={(e) => setDiscountCode(e.target.value)}
+                />
+                <div className="input-group-append">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleApplyDiscount}
+                  >
+                    <FaPercent className="mr-2" />
+                    Áp dụng
+                  </button>
                 </div>
               </div>
-              <div className="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                <div className="media align-items-center">
-                  <div className="mr-2 text-danger">&middot;</div>
-                  <div className="media-body">
-                    <p className="m-0">Món</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center">
-                  <span className="count-number float-right">
-                    <button
-                      type="button"
-                      className="btn-sm left dec btn btn-outline-secondary"
-                    >
-                      <FaMinus />
-                    </button>
-                    <input
-                      className="count-number-input"
-                      type="text"
-                      readOnly
-                      value="1"
-                    />
-                    <button
-                      type="button"
-                      className="btn-sm right inc btn btn-outline-secondary"
-                    >
-                      <FaPlus />
-                    </button>
-                  </span>
-                  <p className="text-gray mb-0 ml-3">45.000 VND</p>
-                </div>
-              </div>
-              <div className="gold-members d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
-                <div className="media align-items-center">
-                  <div className="mr-2 text-success">&middot;</div>
-                  <div className="media-body">
-                    <p className="m-0">Món</p>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center">
-                  <span className="count-number float-right">
-                    <button
-                      type="button"
-                      className="btn-sm left dec btn btn-outline-secondary"
-                    >
-                      <FaMinus />
-                    </button>
-                    <input
-                      className="count-number-input"
-                      type="text"
-                      readOnly
-                      value="1"
-                    />
-                    <button
-                      type="button"
-                      className="btn-sm right inc btn btn-outline-secondary"
-                    >
-                      <FaPlus />
-                    </button>
-                  </span>
-                  <p className="text-gray mb-0 ml-3">45.000 VND</p>
-                </div>
-              </div>
+               
             </div>
             <div className="bg-white p-3 clearfix border-bottom">
               <p className="mb-1">
-                Tổng Tiền <span className="float-right text-dark">135.000 VND</span>
+                Tổng Tiền{" "}
+                <span className="float-right text-dark">
+                  {formatMoney(calculateTotal())}
+                </span>
               </p>
               <p className="mb-1">
                 Phí dịch vụ
-                <span className="float-right text-dark">50.000 VND</span>
+                <span className="float-right text-dark">
+                  {formatMoney(50000)}
+                </span>
               </p>
               <p className="mb-1">
                 Phí giao hàng
                 <span className="text-info ml-1">
-                <IoIosInformationCircleOutline />
+                  <IoIosInformationCircleOutline />
                 </span>
-                <span className="float-right text-dark">32.000 VND</span>
+                <span className="float-right text-dark">
+                  {formatMoney(32000)}
+                </span>
               </p>
               <p className="mb-1 text-success">
                 Tổng
-                <span className="float-right text-success">VND</span>
+                <span className="float-right text-success">
+                  {formatMoney(calculateTotal() + 50000 + 32000)}
+                </span>
               </p>
               <hr />
+
               <h6 className="font-weight-bold mb-0">
-                Thanh toán <span className="float-right">VND</span>
+                Tổng tiền{" "}
+                <span className="float-right">
+                  {formatMoney(calculateTotal() + 50000 + 32000)}
+                </span>
               </h6>
             </div>
             <div className="p-3">
-              <a
+              <button
                 className="btn btn-success btn-block btn-lg"
-                href="orderSuccess"
+                onClick={handleCheckout}
+                disabled={loading}
               >
-                Thanh toán
-              </a>
+                {loading
+                  ? "Đang xử lý..."
+                  : `Trả ${formatMoney(calculateTotal() + 50000 + 32000)}`}
+                <i className="feather-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>

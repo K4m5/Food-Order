@@ -1,54 +1,57 @@
-import { FaRegClock, FaRegHeart, FaRegStar } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { formatMoney } from "../utils/formatMoney";
 
-const ProductItem = () => {
+const ProductItem = ({ food }) => {
+  console.log(food, "2");
   return (
     <div className="osahan-slider-item">
       <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
         <div className="list-card-image">
-          <div className="star position-absolute">
-            <span
-              className="badge badge-success"
-              style={{
-                alignItems: "center",
-                display: "flex",
-                gap: "5px",
-              }}
-            >
-              <FaRegStar className="feather-star" />
-              3.1 (300+)
-            </span>
-          </div>
-          <div className="favourite-heart text-danger position-absolute">
+          {/* <div className="favourite-heart text-danger position-absolute">
             <Link to="#">
               <FaRegHeart className="feather-heart" />
             </Link>
-          </div>
-          <div className="member-plan position-absolute">
-            <span className="badge badge-dark">Promoted</span>
-          </div>
-          <Link to="restaurant">
-            <img alt="#" src="img/trending3.png" className="img-fluid item-img w-100" />
+          </div> */}
+
+          <Link to={`foods/${food._id}`}>
+            <img
+              alt="#"
+              src={food?.image || "img/trending3.png"}
+              className="img-fluid item-img w-100   "
+              style={{
+                height: "200px",
+                
+                objectFit: "cover",
+                borderRadius: "10px",
+              }}
+            />
           </Link>
         </div>
         <div className="p-3 position-relative">
           <div className="list-card-body">
             <h6 className="mb-1">
-              <Link to="restaurant" className="text-black">
-                The osahan Restaurant
+            <Link to={`foods/${food._id}`} className="text-black">
+                {food?.name}
               </Link>
             </h6>
-            <p className="text-gray mb-3">North • Hamburgers • Pure veg</p>
-            <p className="text-gray mb-3 time">
-              <span className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2">
+
+            <p className="text-gray mb-3 time d-flex justify-content-between algin-items-center">
+              <span
+                className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2 d-flex   justify-content-start align-items-center"
+                style={{ gap: "5px" }}
+              >
                 <FaRegClock className="feather-clock" />
                 15–25 min
               </span>
-              <span className="float-right text-black-50 "> 200.000 VND</span>
+              <span className="float-right text-black-50 ">
+                {" "}
+                {formatMoney(food?.price)}
+              </span>
             </p>
           </div>
           <div className="list-card-badge">
-            <span className="badge badge-danger">OFFER</span> <small>65% OSAHAN50</small>
+            <small>{food?.category?.name || " OSAHAN50"}</small>
           </div>
         </div>
       </div>

@@ -131,7 +131,7 @@ body.hc-nav-open {
 
 .hc-offcanvas-nav.disable-body.nav-open::after,
 .hc-offcanvas-nav .sub-level-open::after {
-    visibility: visible;
+    visibility: hidden;
     opacity: 1;
     transition-delay: .05s
 }

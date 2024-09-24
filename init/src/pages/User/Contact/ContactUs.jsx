@@ -1,35 +1,29 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createContact } from "../../../features/contact/contactSlice";
+
 const ContactUs = () => {
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createContact({ message }));
+  };
   return (
     <div className="osahan-cart-item-profile bg-white rounded shadow-sm p-4">
       <div className="flex-column">
         <h6 className="font-weight-bold">Hãy cho chúng tôi biết về bạn</h6>
-        <p className="text-muted">Cho dù bạn có thắc mắc hay bạn chỉ muốn chào hỏi, hãy liên hệ với chúng tôi.</p>
-        <form>
+        <p className="text-muted">
+          Cho dù bạn có thắc mắc hay bạn chỉ muốn chào hỏi, hãy liên hệ với
+          chúng tôi.
+        </p>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleFormControlInput1" className="small font-weight-bold">
-              Tên của bạn
-            </label>
-            <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Tên của bạn ..." />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput2" className="small font-weight-bold">
-              Địa chỉ email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleFormControlInput2"
-              placeholder="Nhập Email ..."
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlInput3" className="small font-weight-bold">
-              Số điện thoại
-            </label>
-            <input type="number" className="form-control" id="exampleFormControlInput3" placeholder="Số điện thoại ..." />
-          </div>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1" className="small font-weight-bold">
+            <label
+              htmlFor="exampleFormControlTextarea1"
+              className="small font-weight-bold"
+            >
               CHÚNG TÔI CÓ THỂ GIÚP BẠN NHƯ THẾ NÀO?
             </label>
             <textarea
@@ -37,15 +31,25 @@ const ContactUs = () => {
               id="exampleFormControlTextarea1"
               placeholder="Xin chào, tôi muốn..."
               rows="3"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
+            {errors.message && (
+              <span className="text-danger">This field is required</span>
+            )}
           </div>
-          <a className="btn btn-primary btn-block" href="#">
+          <button type="submit" className="btn btn-primary btn-block">
             Xác nhận
-          </a>
+          </button>
         </form>
 
         <div className="mapouter pt-3">
-          <div className="gmap_canvas">
+          <div className="gmap_canvas" style={{
+            overflow: "hidden",
+            background: "none!important",
+            height: "300px",
+            width: "100%",
+          }}>
             <iframe
               width="100%"
               height="100%"
