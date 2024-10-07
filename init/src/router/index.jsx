@@ -6,9 +6,7 @@ import {
   Checkout,
   ContactUs,
   Faq,
-  Favorite,
   Foods,
-  ForgotPassword,
   Home,
   Login,
   Map,
@@ -23,7 +21,6 @@ import {
   Signup,
   Term,
   Tredding,
-  Verification,
 } from "../pages";
 
 const router = createBrowserRouter([
@@ -55,10 +52,6 @@ const router = createBrowserRouter([
       {
         path: "offers",
         element: <Offers />,
-      },
-      {
-        path: "favorites",
-        element: <Favorite />,
       },
       {
         path: "trending",
@@ -119,14 +112,6 @@ const router = createBrowserRouter([
       {
         path: "sign-up",
         element: <Signup />,
-      },
-      {
-        path: "/forgot_password",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "/verify",
-        element: <Verification />,
       },
     ],
   },
