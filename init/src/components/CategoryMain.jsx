@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 import { fetchCategories } from "../features/category/categorySlice";
@@ -18,7 +18,7 @@ const CategoryMain = () => {
           arrows: true,
           centerMode: true,
           centerPadding: "40px",
-          slidesToShow: 4,
+          slidesToShow: 3,
         },
       },
       {
@@ -27,7 +27,7 @@ const CategoryMain = () => {
           arrows: false,
           centerMode: true,
           centerPadding: "40px",
-          slidesToShow: 4,
+          slidesToShow: 2,
         },
       },
     ],
@@ -43,13 +43,10 @@ const CategoryMain = () => {
       <div>
         <Slider {...settingsCat}>
           {categories.map((category, index) => (
-            <>
-              <div key={index}>
-                <CategoryItem category={category} key={index} />
-              </div>
-            </>
+            <Fragment key={index}>
+              <CategoryItem category={category} key={index} />
+            </Fragment>
           ))}
-         
         </Slider>
       </div>
     </div>

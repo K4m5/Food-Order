@@ -36,13 +36,7 @@ const ProfileLayout = () => {
               <div className="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
                 <Link to="profile" className="">
                   <div className="d-flex align-items-center p-3">
-                    <div className="left mr-3">
-                      <img
-                        alt="#"
-                        src="img/user1.jpg"
-                        className="rounded-circle"
-                      />
-                    </div>
+                    
                     <div className="right">
                       <h6 className="mb-1 font-weight-bold">
                         {user?.fullname || "Bạn chưa đăng nhập"}{" "}

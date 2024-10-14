@@ -17,9 +17,8 @@ const Header = () => {
   const { user } = useSelector((state) => state.user);
   const token = localStorage.getItem("accessToken");
   const { isActive, toggleSidebar } = useContext(SidebarContext);
-  const [searchTerm, setSearchTerm] = useState('');
- 
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [selectedProvince, setSelectedProvince] = useState("");
   const [userAddress, setUserAddress] = useState("");
 
@@ -112,9 +111,6 @@ const Header = () => {
                     </div>
 
                     <div>
-                      <p className="text-muted mb-0 small">Chọn địa chỉ</p>
-                      {/* active provinces when user selected */}
-
                       {selectedProvince || userAddress || "Chọn địa chỉ"}
                     </div>
                   </Link>
@@ -137,7 +133,6 @@ const Header = () => {
                             name="search"
                             value={searchTerm}
                             onChange={handleSearchChange}
-                 
                           />
                         </div>
                       </div>
@@ -230,11 +225,6 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <img
-                          alt="#"
-                          src="img/user/1.jpg"
-                          className="img-fluid rounded-circle header-user mr-2 header-user"
-                        />
                         {user?.fullname || ""}{" "}
                       </Link>
                       <div

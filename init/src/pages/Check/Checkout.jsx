@@ -20,14 +20,14 @@ import { formatMoney } from "../../utils/formatMoney";
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { coupons } = useSelector((state) => state.coupons);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
   const [discountCode, setDiscountCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState("01");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedWard, setSelectedWard] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
@@ -65,8 +65,8 @@ function Checkout() {
   const handleUpdateQuantity = (id, quantity) => {
     if (quantity > 0) {
       dispatch(updateCartItem({ id, quantity }));
-    }else{
-      toast.error("Số lượng phải lớn hơn 0")
+    } else {
+      toast.error("Số lượng phải lớn hơn 0");
     }
   };
   // random code
@@ -147,8 +147,7 @@ function Checkout() {
           districts.find((district) => district.district_id == selectedDistrict)
             .district_name +
           ", " +
-          provinces.find((province) => province.province_id == selectedProvince)
-            .province_name,
+          " Tỉnh Hà Nội",
 
         coupon: discountCode,
       };
@@ -160,20 +159,6 @@ function Checkout() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    // Fetch provinces
-    axios
-      .get("https://vapi.vnappmob.com/api/province/", {
-        mode: "cors", // Thay đổi từ 'no-cors' thành 'cors'
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setProvinces(response.data.results);
-      });
-  }, []);
 
   useEffect(() => {
     if (selectedProvince) {
@@ -199,6 +184,11 @@ function Checkout() {
         });
     }
   }, [selectedDistrict]);
+  useEffect(() => {
+    if (user) {
+      setPhone(user.phone);
+    }
+  }, [user]);
   if (!isAuthenticated) {
     return (
       <div
@@ -247,26 +237,7 @@ function Checkout() {
                     <div className="row">
                       {/* danh sasch tinh thanh pho */}
 
-                      <div className="col-md-3 mb-3">
-                        <label htmlFor="province">Tỉnh/Thành phố</label>
-                        <select
-                          id="province"
-                          className="form-control"
-                          value={selectedProvince}
-                          onChange={(e) => setSelectedProvince(e.target.value)}
-                        >
-                          <option value="">Chọn Tỉnh/Thành phố</option>
-                          {provinces.map((province) => (
-                            <option
-                              key={province.province_id}
-                              value={province.province_id}
-                            >
-                              {province.province_name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="col-md-3 mb-3">
+                      <div className="col-md-4 mb-3">
                         <label htmlFor="district">Quận/Huyện</label>
                         <select
                           id="district"
@@ -286,7 +257,7 @@ function Checkout() {
                           ))}
                         </select>
                       </div>
-                      <div className="col-md-3 mb-3">
+                      <div className="col-md-4 mb-3">
                         <label htmlFor="ward">Xã/Phường</label>
                         <select
                           id="ward"
@@ -303,7 +274,7 @@ function Checkout() {
                           ))}
                         </select>
                       </div>
-                      <div className="col-md-3 mb-3">
+                      <div className="col-md-4 mb-3">
                         <label htmlFor="phone">Số điện thoại</label>
                         <input
                           type="text"
@@ -314,6 +285,7 @@ function Checkout() {
                           placeholder="Nhập số điện thoại"
                         />
                       </div>
+
                       <div className="col-md-12 mb-3">
                         <label htmlFor="homeAddress">Địa chỉ nhà</label>
                         <input
