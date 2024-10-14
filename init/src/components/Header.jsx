@@ -86,8 +86,8 @@ const Header = () => {
   });
   return (
     <>
-      <header className="section-header">
-        <section className="header-main shadow-sm bg-white">
+      <header className="section-header  ">
+        <section className="header-main shadow-sm bg-white py-3">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-1">

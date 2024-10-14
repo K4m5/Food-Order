@@ -51,7 +51,7 @@ const FoodByCategory = () => {
       </div>
       <div className="container">
         <div className="py-5">
-          <div className="row">
+          <div className="row g-4 mb-4">
             <div className="col-md-12 mb-2">
               <h2>Danh sách món ăn của {category?.name}</h2>
             </div>
@@ -61,9 +61,11 @@ const FoodByCategory = () => {
               </div>
             )}
             {foodByCategory.map((food, index) => (
-              <div className="col-md-3" key={index}>
-                <ProductItem food={food} />
-              </div>
+              <>
+                <div className="col-md-3 mb-3" key={index}>
+                  <ProductItem food={food} />
+                </div>
+              </>
             ))}
             {status === "succeeded" && foodByCategory.length === 0 && (
               <div

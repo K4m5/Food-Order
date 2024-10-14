@@ -49,19 +49,21 @@ const Foods = () => {
       (total, item) => total + (item?.topping?.price || 0),
       0
     );
-    return (foodPrice) * quantity + toppingsPrice;
+    return foodPrice * quantity + toppingsPrice;
   };
   const handleAddToCart = () => {
     //  kiểm tra xem người dùng đã đăng nhập chưa
     if (!localStorage.getItem("accessToken")) {
-       toast.error("Vui lòng đăng nhập để thêm vào giỏ hàng");
+      toast.error("Vui lòng đăng nhập để thêm vào giỏ hàng");
       return;
     }
-    dispatch(addItemToCart({
-      food,
-      toppings: selectedItems.map(item => item.topping),
-      quantity,
-    }));
+    dispatch(
+      addItemToCart({
+        food,
+        toppings: selectedItems.map((item) => item.topping),
+        quantity,
+      })
+    );
   };
   const settingTrendding = {
     slidesToShow: 3,
@@ -212,110 +214,6 @@ const Foods = () => {
                     </div>
                   </div>
                 ))}
-              <div className="osahan-slider-item">
-                <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                  <div className="list-card-image">
-                    <a href="checkout.html">
-                      <img
-                        alt="#"
-                        src="img/trending1.png"
-                        className="img-fluid item-img w-100"
-                      />
-                    </a>
-                  </div>
-                  <div className="p-3 position-relative">
-                    <div className="list-card-body">
-                      <h6 className="mb-1">
-                        <a href="checkout" className="text-black">
-                          Món ăn
-                        </a>
-                      </h6>
-                      <p className="text-gray mb-3">Loại</p>
-                      <p className="text-gray m-0">
-                        <span className="text-black-50"> 250.000 VND</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="osahan-slider-item">
-                <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                  <div className="list-card-image">
-                    <a href="checkout.html">
-                      <img
-                        alt="#"
-                        src="img/trending2.png"
-                        className="img-fluid item-img w-100"
-                      />
-                    </a>
-                  </div>
-                  <div className="p-3 position-relative">
-                    <div className="list-card-body">
-                      <h6 className="mb-1">
-                        <a href="checkout.html" className="text-black">
-                          Món ăn
-                        </a>
-                      </h6>
-                      <p className="text-gray mb-3">Loại</p>
-                      <p className="text-gray m-0">
-                        <span className="text-black-50"> Giá tiền</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="osahan-slider-item">
-                <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                  <div className="list-card-image">
-                    <a href="checkout.html">
-                      <img
-                        alt="#"
-                        src="img/trending3.png"
-                        className="img-fluid item-img w-100"
-                      />
-                    </a>
-                  </div>
-                  <div className="p-3 position-relative">
-                    <div className="list-card-body">
-                      <h6 className="mb-1">
-                        <a href="checkout.html" className="text-black">
-                          Món ăn
-                        </a>
-                      </h6>
-                      <p className="text-gray mb-3">Loại</p>
-                      <p className="text-gray m-0">
-                        <span className="text-black-50"> Giá tiền</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="osahan-slider-item">
-                <div className="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                  <div className="list-card-image">
-                    <a href="checkout.html">
-                      <img
-                        alt="#"
-                        src="img/trending2.png"
-                        className="img-fluid item-img w-100"
-                      />
-                    </a>
-                  </div>
-                  <div className="p-3 position-relative">
-                    <div className="list-card-body">
-                      <h6 className="mb-1">
-                        <a href="checkout.html" className="text-black">
-                          Món ăn
-                        </a>
-                      </h6>
-                      <p className="text-gray mb-3">Loại</p>
-                      <p className="text-gray m-0">
-                        <span className="text-black-50">Giá tiền</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </Slider>
           </div>
         </div>
