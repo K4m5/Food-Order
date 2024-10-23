@@ -25,6 +25,8 @@ const authSlice = createSlice({
       state.userInfo = null;
       state.accessToken = null;
       state.error = null;
+      state.registerSuccess= false
+
     },
     setCredentials: (state, { payload }) => {
       state.userInfo = payload;
@@ -49,13 +51,13 @@ const authSlice = createSlice({
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload.error.message;
-   
         state.success = false;
       })
       // register user
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.registerSuccess = false;  
       })
       .addCase(registerUser.fulfilled, (state) => {
         state.loading = false;
@@ -64,9 +66,11 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+        state.registerSuccess = false;  
       });
   },
 });
 
- 
+export const { logout } = authSlice.actions;
+
 export default authSlice.reducer;

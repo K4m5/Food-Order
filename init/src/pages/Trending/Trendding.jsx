@@ -19,7 +19,7 @@ const Tredding = () => {
   const { foods, currentPage, totalPages, next, prev } = useSelector(
     (state) => state.foods
   );
-  const [priceRange, setPriceRange] = useState([0, 10000000]);
+  const [priceRange, setPriceRange] = useState([0, 2000000]);
   const [fiterChange, setFilterChange] = useState(false);
 
   const handlePriceFilterChange = (event) => {

@@ -25,7 +25,7 @@ const Footer = () => {
           </div>
           <div className="col">
             <Link
-              to="/most_popular"
+              to="/offers"
               className="text-dark small font-weight-bold text-decoration-none"
             >
               <p className="h4 m-0">

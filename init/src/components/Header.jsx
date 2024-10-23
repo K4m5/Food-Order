@@ -8,6 +8,7 @@ import { RiMapPinLine, RiShoppingCartLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { SidebarContext } from "../context/SidebarContext";
+import { logout } from "../features/auth/authSlice";
 import { fetchProvinces } from "../features/provinces/provinceSlice";
 import { userProfile } from "../features/user/userSlice";
 
@@ -28,9 +29,8 @@ const Header = () => {
     }
   }, [dispatch, token, navigate]);
 
-  const logout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+  const handleLogout = () => {
+    dispatch(logout());
     navigate("/login");
   };
   useEffect(() => {
@@ -246,7 +246,7 @@ const Header = () => {
                         <Link className="dropdown-item" to="/privacy">
                           Chính sách bảo mật
                         </Link>
-                        <button className="dropdown-item" onClick={logout}>
+                        <button className="dropdown-item" onClick={handleLogout}>
                           Đăng xuất
                         </button>
                       </div>

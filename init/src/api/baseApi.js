@@ -86,7 +86,13 @@ baseApi.interceptors.response.use(
       // Handle not found errors
       toast.error(error.response.data.message);
       console.error(error.response.data);
-    } else {
+    } else if (status === 400) {
+    
+      toast.error(error.response.data.message);
+      console.error(error.response.data);
+      return Promise.reject(error);
+    }
+    else {
       console.error(error.response.data);
       
     }

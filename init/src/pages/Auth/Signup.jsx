@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../features/auth/authApiSlice";
@@ -8,24 +7,22 @@ import { registerUser } from "../../features/auth/authApiSlice";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {registerSuccess,error} = useSelector((state) => state.auth);
+  const { registerSuccess, error } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(registerUser(data));
   };
-  if(registerSuccess) {
-    navigate("/login");
-  }
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (registerSuccess) {
+      navigate("/login");
     }
-  }, [error]);
+  }, [navigate, registerSuccess]);
+
+   
 
   return (
     <>
@@ -47,15 +44,13 @@ const Signup = () => {
                 required: "Vui lòng nhập tên",
               })}
             />
-            {
-              errors.name && (
-                <span className="error-message">{errors.name.message}</span>
-              )
-            }
+            {errors.name && (
+              <span className="error-message">{errors.name.message}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="address" className="text-dark">
-            Address
+              Address
             </label>
             <input
               type="text"
@@ -67,11 +62,9 @@ const Signup = () => {
                 required: "Vui lòng nhập địa chỉ",
               })}
             />
-            {
-              errors.address && (
-                <span className="error-message">{errors.address.message}</span>
-              )
-            }
+            {errors.address && (
+              <span className="error-message">{errors.address.message}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="email" className="text-dark">
@@ -91,15 +84,13 @@ const Signup = () => {
                 },
               })}
             />
-            {
-              errors.email && (
-                <span className="error-message">{errors.email.message}</span>
-              )
-            }
+            {errors.email && (
+              <span className="error-message">{errors.email.message}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="username" className="text-dark">
-            Username
+              Username
             </label>
             <input
               type="text"
@@ -111,11 +102,9 @@ const Signup = () => {
                 required: "Vui lòng nhập username",
               })}
             />
-            {
-              errors.username && (
-                <span className="error-message">{errors.username.message}</span>
-              )
-            }
+            {errors.username && (
+              <span className="error-message">{errors.username.message}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="phone" className="text-dark">
@@ -135,11 +124,9 @@ const Signup = () => {
                 },
               })}
             />
-            {
-              errors.phone && (
-                <span className="error-message">{errors.phone.message}</span>
-              )
-            }
+            {errors.phone && (
+              <span className="error-message">{errors.phone.message}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="password" className="text-dark">
@@ -155,13 +142,13 @@ const Signup = () => {
                 minLength: 6,
               })}
             />
-            {
-              errors.password && (
-                <span className="error-message">{errors.password.message}</span>
-              )
-            }
+            {errors.password && (
+              <span className="error-message">{errors.password.message}</span>
+            )}
           </div>
-          <button className="btn btn-primary btn-lg btn-block" type="submit">Đăng ký</button>
+          <button className="btn btn-primary btn-lg btn-block" type="submit">
+            Đăng ký
+          </button>
           <div className="py-2">
             <button className="btn btn-facebook btn-lg btn-block">
               <i className="feather-facebook"></i> Đăng ký với Facebook
