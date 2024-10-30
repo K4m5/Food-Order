@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchDetailsOrder } from "../../../features/order/orderSlice";
@@ -29,7 +29,6 @@ const OrderDetail = () => {
                   Review
                 </a>
               </div>
-               
 
               <div className="p-3 border-bottom bg-white">
                 <h6 className="font-weight-bold">Địa chỉ</h6>
@@ -37,8 +36,8 @@ const OrderDetail = () => {
               </div>
               <div className="p-3 border-bottom">
                 <p className="font-weight-bold   mb-1">Đơn hàng</p>
-                {order.detailOrders?.map((item) => (
-                  <>
+                {order.detailOrders?.map((item,index) => (
+                  <Fragment key={index}>
                     <img
                       alt="#"
                       src={item.food.image}
@@ -65,7 +64,7 @@ const OrderDetail = () => {
                         </div>
                       </div>
                     ))}
-                  </>
+                  </Fragment>
                 ))}
               </div>
 

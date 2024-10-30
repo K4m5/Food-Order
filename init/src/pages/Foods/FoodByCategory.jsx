@@ -287,7 +287,7 @@ const FoodByCategory = () => {
                       range
                       min={minPrice}
                       max={maxPrice}
-                      step={10000}
+                      step={50000}
                       defaultValue={priceRange}
                       onChange={handlePriceRangeChange}
                     />

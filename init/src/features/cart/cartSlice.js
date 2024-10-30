@@ -79,30 +79,31 @@ const cartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addItemToCart.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        const { food, toppings, quantity } = action.payload;
-        const existingItem = state.items.find(
-          (item) => item.food._id === food._id
-        );
-        const toppingsPrice = toppings.reduce(
-          (total, topping) => total + topping.price,
-          0
-        );
-        const totalPrice = (food.price + toppingsPrice) * quantity;
+        // state.status = "succeeded";
+        // console.log(action.payload.cart);
+        // const { food, toppings, quantity } = action.payload;
+        // const existingItem = state.items.find(
+        //   (item) => item.food._id === food._id
+        // );
+        // const toppingsPrice = toppings.reduce(
+        //   (total, topping) => total + topping.price,
+        //   0
+        // );
+        // const totalPrice = (food.price + toppingsPrice) * quantity;
 
-        if (existingItem) {
-          existingItem.quantity += quantity;
-          existingItem.totalPrice += totalPrice;
-          existingItem.toppings = [...existingItem.toppings, ...toppings];
-        } else {
-          state.items.push({
-            food,
-            toppings,
-            quantity,
-            totalPrice,
-          });
-        }
-        state.totalAmount += totalPrice;
+        // if (existingItem) {
+        //   existingItem.quantity += quantity;
+        //   existingItem.totalPrice += totalPrice;
+        //   existingItem.toppings = [...existingItem.toppings, ...toppings];
+        // } else {
+        //   state.items.push({
+        //     food,
+        //     toppings,
+        //     quantity,
+        //     totalPrice,
+        //   });
+        // }
+        // state.totalAmount += totalPrice;
       })
       .addCase(addItemToCart.rejected, (state, action) => {
         state.status = "failed";

@@ -6,6 +6,7 @@ import { formatMoney } from "../../../utils/formatMoney";
 
 const MyOrder = () => {
   const { orders, currentPage } = useSelector((state) => state.orders);
+  const activeTab = useSelector((state) => state.tab.activeTab);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("fetchOrders");
@@ -30,8 +31,8 @@ const MyOrder = () => {
     }
   };
   const renderOrders = (orders) =>
-    orders.map((order) => (
-      <div key={order.id} className="pb-3">
+    orders.map((order, index) => (
+      <div key={index} className="pb-3">
         <div className="p-3 rounded shadow-sm bg-white">
           <div className="d-flex border-bottom pb-3">
             <div>
@@ -98,7 +99,9 @@ const MyOrder = () => {
     <>
       <div className="tab-content" id="myTabContent">
         <div
-          className="tab-pane fade show active"
+          className={`tab-pane fade ${
+            activeTab === "completed" ? "show active" : ""
+          }`}
           id="completed"
           role="tabpanel"
           aria-labelledby="completed-tab"
@@ -106,7 +109,9 @@ const MyOrder = () => {
           <div className="order-body">{renderOrders(completedOrders)}</div>
         </div>
         <div
-          className="tab-pane fade"
+          className={`tab-pane fade ${
+            activeTab === "progress" ? "show active" : ""
+          }`}
           id="progress"
           role="tabpanel"
           aria-labelledby="progress-tab"
@@ -114,7 +119,7 @@ const MyOrder = () => {
           <div className="order-body">{renderOrders(progressOrders)}</div>
         </div>
         <div
-          className="tab-pane fade"
+          className={`tab-pane fade ${activeTab === "pending" ? "show active" : ""}`}
           id="pending"
           role="tabpanel"
           aria-labelledby="pending-tab"
@@ -122,7 +127,7 @@ const MyOrder = () => {
           <div className="order-body">{renderOrders(pendingOrders)}</div>
         </div>
         <div
-          className="tab-pane fade"
+          className={`tab-pane fade ${activeTab === "canceled" ? "show active" : ""}`}
           id="canceled"
           role="tabpanel"
           aria-labelledby="canceled-tab"

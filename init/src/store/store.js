@@ -9,6 +9,7 @@ import couponReducer from "../features/coupons/couponSlice";
 import foodReducer from "../features/foods/foodSlice";
 import orderReducer from "../features/order/orderSlice";
 import provinceReducer from "../features/provinces/provinceSlice";
+import tabReducer from "../features/tab/tabSlice";
 import userReducer from "../features/user/userSlice";
 
 export const store = configureStore({
@@ -23,8 +24,13 @@ export const store = configureStore({
     orders: orderReducer,
     cart: cartReducer,
     contacts: contactReducer,
+    tab: tabReducer,
+
   },
 
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
   devTools: true,
 });

@@ -8,7 +8,7 @@ import { SidebarContext } from "../../context/SidebarContext";
 import { fetchFoods } from "../../features/foods/foodSlice";
 import { formatMoney } from "../../utils/formatMoney";
 
-const maxPrice = 10000000;
+const maxPrice = 2000000;
 const minPrice = 0;
 const Tredding = () => {
   const dispatch = useDispatch();
@@ -252,7 +252,7 @@ const Tredding = () => {
                       range
                       min={minPrice}
                       max={maxPrice}
-                      step={10000}
+                      step={50000}
                       defaultValue={priceRange}
                       onChange={handlePriceRangeChange}
                     />

@@ -92,6 +92,13 @@ const Offers = () => {
                       </p>
                       <p className="font-weight-bold mb-2">{coupon.title}</p>
                       <p className="mb-4">{coupon.description}</p>
+                      <div className="d-flex   ">
+                        <p>số lượng :</p>
+                        <p className="mb-4">{coupon.quantity}</p>
+                      </div>
+                      <p className="mb-4">
+                        {new Date(coupon.expiry_date).toLocaleString()}
+                      </p>
                       <Link
                         to="#"
                         className="btn btn-outline-primary"

@@ -14,12 +14,13 @@ import {
   updateCartItem,
 } from "../../features/cart/cartSlice";
 import { fetchCoupons } from "../../features/coupons/couponSlice";
-import { createOrder } from "../../features/order/orderSlice";
+import { createOrder, resetOrder } from "../../features/order/orderSlice";
 import { formatMoney } from "../../utils/formatMoney";
 
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { coupons } = useSelector((state) => state.coupons);
+  const { status } = useSelector((state) => state.orders);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
@@ -36,10 +37,10 @@ function Checkout() {
   const navigate = useNavigate();
   const { toggleSidebar } = useContext(SidebarContext);
   useEffect(() => {
-    dispatch(fetchCartItems());
-  }, []);
+    dispatch(fetchCartItems(123));
+  }, [dispatch]);
   useEffect(() => {
-    dispatch(fetchCoupons());
+    dispatch(fetchCoupons(123));
   }, [dispatch]);
 
   const handleRemoveItem = (id) => {
@@ -118,7 +119,7 @@ function Checkout() {
   const handleCheckout = async () => {
     setLoading(true);
     if (items.length === 0) {
-      toast.error("Giỏ hàng của bạn đang trống");
+       
       setLoading(false);
       return;
     }
@@ -152,13 +153,18 @@ function Checkout() {
         coupon: discountCode,
       };
       dispatch(createOrder(orderData));
-      navigate("/orderSuccess");
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
+  useEffect( () => {
+    if (status === "succeeded") {
+      dispatch(resetOrder());
+      navigate("/orderSuccess");
+    }
+  }, [navigate, status, dispatch]);
 
   useEffect(() => {
     if (selectedProvince) {

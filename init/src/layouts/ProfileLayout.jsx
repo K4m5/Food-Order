@@ -7,15 +7,21 @@ import {
 } from "react-icons/bi";
 import { BsInfoCircle, BsTruck } from "react-icons/bs";
 import { FaBars, FaRegCheckCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import { SidebarContext } from "../context/SidebarContext";
+import { setActiveTab } from "../features/tab/tabSlice";
 const ProfileLayout = () => {
   const { user } = useSelector((state) => state.user);
   const token = localStorage.getItem("accessToken");
 
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state) => state.tab.activeTab);
 
+  const handleTabClick = (tab) => {
+    dispatch(setActiveTab(tab));
+  };
   const handleClose = () => setShow(!show);
   const { toggleSidebar } = useContext(SidebarContext);
 
@@ -36,7 +42,6 @@ const ProfileLayout = () => {
               <div className="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
                 <Link to="profile" className="">
                   <div className="d-flex align-items-center p-3">
-                    
                     <div className="right">
                       <h6 className="mb-1 font-weight-bold">
                         {user?.fullname || "Bạn chưa đăng nhập"}{" "}
@@ -84,60 +89,72 @@ const ProfileLayout = () => {
                       role="tablist"
                     >
                       <li className="nav-item" role="presentation">
-                        <a
-                          className="nav-link border-0 text-dark py-3 active"
+                        <Link
+                          className={`nav-link border-0 text-dark py-3 ${
+                            activeTab === "completed" ? "active" : ""
+                          }`}
                           id="completed-tab"
                           data-toggle="tab"
-                          href="#completed"
+                          to="/my_order#completed"
+                          onClick={() => handleTabClick("completed")}
                           role="tab"
                           aria-controls="completed"
-                          aria-selected="true"
+                          aria-selected={activeTab === "completed"}
                         >
                           <i className=" mr-2 text-success mb-0"></i>
                           Hoàn thành
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item border-top" role="presentation">
-                        <a
-                          className="nav-link border-0 text-dark py-3"
+                        <Link
+                          className={`nav-link border-0 text-dark py-3 ${
+                            activeTab === "progress" ? "active" : ""
+                          }`}
                           id="progress-tab"
                           data-toggle="tab"
-                          href="#progress"
+                          to="/my_order#progress"
+                          onClick={() => handleTabClick("progress")}
                           role="tab"
                           aria-controls="progress"
-                          aria-selected="false"
+                          aria-selected={activeTab === "progress"}
                         >
                           <i className="feather-clock mr-2 text-warning mb-0"></i>{" "}
                           Đang xử lý
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item border-top" role="presentation">
-                        <a
-                          className="nav-link border-0 text-dark py-3"
+                        <Link
+                          className={`nav-link border-0 text-dark py-3 ${
+                            activeTab === "pending" ? "active" : ""
+                          }`}
                           id="pending-tab"
                           data-toggle="tab"
-                          href="#pending"
+                          to="/my_order#pending"
                           role="tab"
+                          onClick={() => handleTabClick("pending")}
                           aria-controls="pending"
-                          aria-selected="false"
+                          aria-selected={activeTab === "pending"}
                         >
                           <i className="feather-clock mr-2 text-warning mb-0"></i>
                           Đang chờ
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item border-top" role="presentation">
-                        <a
-                          className="nav-link border-0 text-dark py-3"
+                        <Link
+                          className={`nav-link border-0 text-dark py-3 ${
+                            activeTab === "canceled" ? "active" : ""
+                          }`}
                           id="canceled-tab"
                           data-toggle="tab"
-                          href="#canceled"
+                          to="/my_order#canceled"
+                          onClick={() => handleTabClick("canceled")}
                           role="tab"
                           aria-controls="canceled"
-                          aria-selected="false"
+                          aria-selected={activeTab === "canceled"}
                         >
                           <i className="feather-x-circle mr-2 text-danger mb-0"></i>{" "}
                           Đã hủy
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   ) : null}
@@ -217,8 +234,6 @@ const ProfileLayout = () => {
           </div>
         </div>
       </div>
-     
-     
     </>
   );
 };

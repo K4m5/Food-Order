@@ -1,5 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../features/cart/cartSlice";
+import { resetOrder } from "../../features/order/orderSlice";
+
  
 function OrderSuccess() {
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+        dispatch( resetOrder());
+        dispatch( clearCart());
+        
+    }, []);
     return (
         <>
             <div className="d-none">
