@@ -14,7 +14,7 @@ import {
   updateCartItem,
 } from "../../features/cart/cartSlice";
 import { fetchCoupons } from "../../features/coupons/couponSlice";
-import { createOrder, resetOrder } from "../../features/order/orderSlice";
+import { createOrder } from "../../features/order/orderSlice";
 import { formatMoney } from "../../utils/formatMoney";
 
 function Checkout() {
@@ -102,7 +102,7 @@ function Checkout() {
       return total + foodPrice + toppingPrice;
     }, 0);
 
-    return total - (total * discount) / 100;
+    return total - 30000 - (total * discount) / 100;
   };
   const totalMoney = () => {
     const total = items.reduce((total, cart) => {
@@ -119,7 +119,6 @@ function Checkout() {
   const handleCheckout = async () => {
     setLoading(true);
     if (items.length === 0) {
-       
       setLoading(false);
       return;
     }
@@ -152,19 +151,14 @@ function Checkout() {
 
         coupon: discountCode,
       };
-      dispatch(createOrder(orderData));
+      await dispatch(createOrder(orderData)).unwrap();
+      navigate("/orderSuccess");
     } catch (error) {
-      console.log(error);
+       console.log(error);
     } finally {
       setLoading(false);
     }
   };
-  useEffect( () => {
-    if (status === "succeeded") {
-      dispatch(resetOrder());
-      navigate("/orderSuccess");
-    }
-  }, [navigate, status, dispatch]);
 
   useEffect(() => {
     if (selectedProvince) {
@@ -182,7 +176,6 @@ function Checkout() {
 
   useEffect(() => {
     if (selectedDistrict) {
-      // Fetch wards based on selected district
       axios
         .get(`https://vapi.vnappmob.com/api/province/ward/${selectedDistrict}`)
         .then((response) => {
@@ -461,6 +454,14 @@ function Checkout() {
                     -{formatMoney((discount * totalMoney()) / 100)}
                   </span>
                 </p>
+                {/* tiền ship */}
+                <p className="mb-1 text-danger">
+                  Phí ship
+                  <span className="float-right text-danger">
+                    - {formatMoney(30000)}
+                  </span>
+                </p>
+
                 <p className="mb-1 text-success">
                   Tổng
                   <span className="float-right text-success">

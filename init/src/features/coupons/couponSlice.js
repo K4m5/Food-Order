@@ -6,7 +6,7 @@ export const fetchCoupons = createAsyncThunk(
   "coupons/fetchCoupons",
   async ({ page, limit }, { rejectWithValue }) => {
     try {
-      console.log("hihi")
+      console.log("hihi");
       if (!page) {
         page = 1;
       }
@@ -23,10 +23,23 @@ export const fetchCoupons = createAsyncThunk(
   }
 );
 
+export const fetchCouponById = createAsyncThunk(
+  "coupons/fetchCouponById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await baseApi.get(`/coupons/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const couponSlice = createSlice({
   name: "coupons",
   initialState: {
     coupons: [],
+    coupon: null,
     status: "idle",
     error: null,
     currentPage: 1,
@@ -49,6 +62,17 @@ const couponSlice = createSlice({
         state.prev = action.payload.prev;
       })
       .addCase(fetchCoupons.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchCouponById.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCouponById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.coupon = action.payload;
+      })
+      .addCase(fetchCouponById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

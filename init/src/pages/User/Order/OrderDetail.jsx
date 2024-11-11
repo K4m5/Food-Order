@@ -3,14 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchDetailsOrder } from "../../../features/order/orderSlice";
 import { formatMoney } from "../../../utils/formatMoney";
-
+import { fetchCouponById } from "../../../features/coupons/couponSlice";
 const OrderDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { order } = useSelector((state) => state.orders);
+  const { coupon } = useSelector((state) => state.coupons);
   useEffect(() => {
     dispatch(fetchDetailsOrder(id));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (order?.order?.coupon) {
+      dispatch(fetchCouponById(order?.order?.coupon));
+    }
+  }, [dispatch, order?.order?.coupon]);
+
   return (
     <section className="bg-white osahan-main-body rounded shadow-sm overflow-hidden">
       <div className="container p-0">
@@ -36,15 +44,19 @@ const OrderDetail = () => {
               </div>
               <div className="p-3 border-bottom">
                 <p className="font-weight-bold   mb-1">Đơn hàng</p>
-                {order.detailOrders?.map((item,index) => (
+
+                {order.detailOrders?.map((item, index) => (
                   <Fragment key={index}>
                     <img
                       alt="#"
                       src={item.food.image}
                       className="img-fluid sc-osahan-logo mr-2"
                     />{" "}
-                    <span className="text-primary font-weight-bold">
-                      {item.food.name}
+                    <span className="text-primary font-weight-bold d-flex align-items-center justify-content-between ">
+                      <div>{item.food.name}</div>
+                      <div>
+                        {formatMoney(item.food.price * item.quantity)}
+                      </div>
                     </span>
                     {item.toppings.map((topping, i) => (
                       <div
@@ -66,6 +78,17 @@ const OrderDetail = () => {
                     ))}
                   </Fragment>
                 ))}
+                {coupon && (
+                  <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
+                    <div className="media align-items-center">
+                      <div className="mr-2">&middot;</div>
+                      <div className="media-body">
+                        <p className="m-0">Mã giảm giá : {coupon?.code }</p>
+                      </div>
+                    </div>
+                    
+                  </div>
+                )}
               </div>
 
               <div className="p-3 bg-white">
