@@ -109,18 +109,16 @@ const FoodByCategory = () => {
       </div>
       <div className="container">
         <div className="py-5">
-          
-            <div className="d-flex align-items-center mb-4 justify-content-between">
-              <h2>Danh sách món ăn của {category?.name}</h2>
-              <a
-                href="#"
-                data-toggle="modal"
-                data-target="#filters"
-                className="ml-auto btn btn-primary"
-              >
-                Lọc
-              </a>
-           
+          <div className="d-flex align-items-center mb-4 justify-content-between">
+            <h2>Danh sách món ăn của {category?.name}</h2>
+            <a
+              href="#"
+              data-toggle="modal"
+              data-target="#filters"
+              className="ml-auto btn btn-primary"
+            >
+              Lọc
+            </a>
           </div>
           <div className="row g-4 mb-4">
             {status === "loading" && (
@@ -288,8 +286,14 @@ const FoodByCategory = () => {
                       min={minPrice}
                       max={maxPrice}
                       step={50000}
-                      defaultValue={priceRange}
+                      
                       onChange={handlePriceRangeChange}
+                      value={priceRange}
+                      style={{
+                        margin: "10px 0",
+                        padding: "5px 0",
+                        width: "100%",
+                      }}
                     />
                     <div className="d-flex justify-content-between mt-2">
                       <span>{formatMoney(priceRange[0])}</span>

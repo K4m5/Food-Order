@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import baseApi from "../../api/baseApi";
 import { addItemToCart } from "../../features/cart/cartSlice";
 import { fetchDetailsFoods } from "../../features/foods/foodSlice";
+import { fetchRatings, submitRating } from "../../features/rating/ratingSlice";
 import { formatMoney } from "../../utils/formatMoney";
 
 const Foods = () => {
@@ -16,12 +17,22 @@ const Foods = () => {
   const [foodToppings, setFoodToppings] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
-
+  const [onChange, setOnChange] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const { food } = useSelector((state) => state.foods);
+  const { ratings, avgStar } = useSelector((state) => state.rating);
 
   useEffect(() => {
     dispatch(fetchDetailsFoods(param.id));
   }, [dispatch, param]);
+
+  useEffect(() => {
+    if (param.id) {
+      dispatch(fetchRatings(param.id));
+    }
+  }, [param.id, dispatch]);
+
   useEffect(() => {
     async function fetchData() {
       const response = await baseApi.get(`/foods/topping/${param.id}`);
@@ -31,6 +42,12 @@ const Foods = () => {
     }
     fetchData();
   }, [param.id]);
+
+  useEffect(() => {
+    if (onChange) {
+      dispatch(fetchRatings(param.id));
+    }
+  }, [dispatch, onChange, param.id]);
 
   const handleSelectItem = (item) => {
     if (selectedItems.includes(item)) {
@@ -50,6 +67,35 @@ const Foods = () => {
       0
     );
     return foodPrice * quantity + toppingsPrice;
+  };
+  const handleRatingSubmit = async () => {
+    const isLoggedIn = localStorage.getItem("accessToken");
+    if (!isLoggedIn) {
+      alert("Vui lòng đăng nhập để đánh giá");
+      return;
+    }
+
+    // check if rating is empty
+    if (!rating) {
+      toast.error("Vui lòng chọn số sao");
+      return;
+    }
+    if (!comment) {
+      toast.error("Vui lòng nhập bình luận");
+      return;
+    }
+
+    try {
+      await dispatch(
+        submitRating({ foodId: param.id, star: rating, content: comment })
+      ).unwrap();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setOnChange(!onChange);
+      setRating(0);
+      setComment("");
+    }
   };
   const handleAddToCart = () => {
     //  kiểm tra xem người dùng đã đăng nhập chưa
@@ -89,6 +135,7 @@ const Foods = () => {
       },
     ],
   };
+  console.log(ratings);
   return (
     <>
       <div className="d-none">
@@ -122,7 +169,7 @@ const Foods = () => {
           </div>
           <div className="pb-4">
             <div className="row">
-              <div className="col-12">
+              <div className="col-6 col-md-2">
                 <p
                   className="text-white-50 font-weight-bold m-0 "
                   style={{
@@ -139,6 +186,12 @@ const Foods = () => {
                 >
                   {formatMoney(food?.price)}
                 </p>
+              </div>
+              <div className="col-6 col-md-2">
+                <p className="text-white-50 font-weight-bold m-0 small">
+                  Số lượng đã bán
+                </p>
+                <p className="text-white m-0">{food?.sold}</p>
               </div>
             </div>
           </div>
@@ -253,6 +306,108 @@ const Foods = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div
+                id="ratings-and-reviews"
+                className="bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating"
+              >
+                <h6 className="mb-0">Rate this Place</h6>
+                <div className="star-rating ml-auto">
+                  <div className="d-inline-block h6 m-0">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <FaRegStar
+                        key={star}
+                        className={`feather-star ${
+                          star <= avgStar ? "text-warning" : ""
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <b className="text-black ml-2"> {avgStar}</b>
+                </div>
+              </div>
+              <div className="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded">
+                <a className="text-primary float-right" href="#">
+                  Top Rated
+                </a>
+                <h6 className="mb-1">All Ratings and Reviews</h6>
+                {ratings &&
+                  ratings.map((rating, index) => (
+                    <div className="reviews-members py-3" key={index}>
+                      <div className="media">
+                        <div className="media-body">
+                          <div className="reviews-members-header">
+                            <div className="star-rating float-right">
+                              <div
+                                className="d-inline-block"
+                                style={{ fontSize: "16px" }}
+                              >
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <FaRegStar
+                                    key={star}
+                                    className={`feather-star ${
+                                      star <= rating.star ? "text-warning" : ""
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                            <h6 className="mb-0">
+                              <a className="text-dark" href="#">
+                                {rating?.user?.fullname}
+                              </a>
+                            </h6>
+                            <p className="text-muted small">
+                              {new Date(rating.created_at).toLocaleDateString()}
+                            </p>
+                          </div>
+                          <div className="reviews-members-body">
+                            <p>{rating.content}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <div className="bg-white p-3 rating-review-select-page rounded shadow-sm">
+                <h6 className="mb-3">Leave Comment</h6>
+                <div className="d-flex align-items-center mb-3">
+                  <p className="m-0 small">Rate the Place</p>
+                  <div className="star-rating ml-auto">
+                    <div className="d-inline-block">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <FaRegStar
+                          key={star}
+                          className={`feather-star ${
+                            star <= rating ? "text-warning" : ""
+                          }`}
+                          onClick={() => setRating(star)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <form>
+                  <div className="form-group">
+                    <label className="form-label small">
+                      Nhập đánh giá của bạn
+                    </label>
+                    <textarea
+                      className="form-control"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    ></textarea>
+                  </div>
+                  <div className="form-group mb-0">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-block"
+                      onClick={handleRatingSubmit}
+                    >
+                      Gửi đánh giá
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
 

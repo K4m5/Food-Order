@@ -11,7 +11,7 @@ import orderReducer from "../features/order/orderSlice";
 import provinceReducer from "../features/provinces/provinceSlice";
 import tabReducer from "../features/tab/tabSlice";
 import userReducer from "../features/user/userSlice";
-
+import ratingReducer from "../features/rating/ratingSlice";
 export const store = configureStore({
   reducer: {
     user: userReducer,
@@ -25,6 +25,7 @@ export const store = configureStore({
     cart: cartReducer,
     contacts: contactReducer,
     tab: tabReducer,
+    rating: ratingReducer,
 
   },
 
