@@ -22,6 +22,7 @@ const Foods = () => {
   const [comment, setComment] = useState("");
   const { food } = useSelector((state) => state.foods);
   const { ratings, avgStar } = useSelector((state) => state.rating);
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   useEffect(() => {
     dispatch(fetchDetailsFoods(param.id));
@@ -135,7 +136,11 @@ const Foods = () => {
       },
     ],
   };
-  console.log(ratings);
+  const handleSeeAllClick = () => {
+    setShowAllReviews(true);
+  };
+  const reviewsToShow = showAllReviews ? ratings : ratings.slice(0, 2);
+
   return (
     <>
       <div className="d-none">
@@ -151,7 +156,21 @@ const Foods = () => {
           <img alt="#" src={food?.image} className="restaurant-pic" />
           <div className="pt-3 text-white">
             <h2 className="font-weight-bold">{food?.name}</h2>
-            <p className="text-white m-0">Địa chỉ</p>
+            <div className="d-inline-block h6 m-0">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <FaRegStar
+                  key={star}
+                  className={`feather-star ${
+                    star <= avgStar ? "text-warning" : ""
+                  }`}
+                />
+              ))}
+              {avgStar > 0 ? (
+                <span className="text-warning ml-2"> {ratings.length} đánh giá</span>
+              ) : (
+                <span className="text-white ml-2">Chưa có đánh giá</span>
+              )}
+            </div>
           </div>
           <div className="pb-4">
             <div className="row">
@@ -311,7 +330,7 @@ const Foods = () => {
                 id="ratings-and-reviews"
                 className="bg-white shadow-sm d-flex align-items-center rounded p-3 mb-3 clearfix restaurant-detailed-star-rating"
               >
-                <h6 className="mb-0">Rate this Place</h6>
+                <h6 className="mb-0"> Đánh giá trung bình</h6>
                 <div className="star-rating ml-auto">
                   <div className="d-inline-block h6 m-0">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -328,51 +347,67 @@ const Foods = () => {
               </div>
               <div className="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded">
                 <a className="text-primary float-right" href="#">
-                  Top Rated
+                  Đánh giá cao nhất
                 </a>
-                <h6 className="mb-1">All Ratings and Reviews</h6>
-                {ratings &&
-                  ratings.map((rating, index) => (
-                    <div className="reviews-members py-3" key={index}>
-                      <div className="media">
-                        <div className="media-body">
-                          <div className="reviews-members-header">
-                            <div className="star-rating float-right">
-                              <div
-                                className="d-inline-block"
-                                style={{ fontSize: "16px" }}
-                              >
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                  <FaRegStar
-                                    key={star}
-                                    className={`feather-star ${
-                                      star <= rating.star ? "text-warning" : ""
-                                    }`}
-                                  />
-                                ))}
+                <h6 className="mb-1"> Đánh giá và bình luận</h6>
+                {reviewsToShow &&
+                  reviewsToShow.map((rating, index) => (
+                    <>
+                      <div className="reviews-members py-3" key={index}>
+                        <div className="media">
+                          <div className="media-body">
+                            <div className="reviews-members-header">
+                              <div className="star-rating float-right">
+                                <div
+                                  className="d-inline-block"
+                                  style={{ fontSize: "16px" }}
+                                >
+                                  {[1, 2, 3, 4, 5].map((star) => (
+                                    <FaRegStar
+                                      key={star}
+                                      className={`feather-star ${
+                                        star <= rating.star
+                                          ? "text-warning"
+                                          : ""
+                                      }`}
+                                    />
+                                  ))}
+                                </div>
                               </div>
+                              <h6 className="mb-0">
+                                <a className="text-dark" href="#">
+                                  {rating?.user?.fullname}
+                                </a>
+                              </h6>
+                              <p className="text-muted small">
+                                {new Date(
+                                  rating.created_at
+                                ).toLocaleDateString()}
+                              </p>
                             </div>
-                            <h6 className="mb-0">
-                              <a className="text-dark" href="#">
-                                {rating?.user?.fullname}
-                              </a>
-                            </h6>
-                            <p className="text-muted small">
-                              {new Date(rating.created_at).toLocaleDateString()}
-                            </p>
-                          </div>
-                          <div className="reviews-members-body">
-                            <p>{rating.content}</p>
+                            <div className="reviews-members-body">
+                              <p>{rating.content}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <hr />
+                    </>
                   ))}
+                {!showAllReviews && ratings.length > 2 && (
+                  <a
+                    className="text-center w-100 d-block mt-3 font-weight-bold"
+                    href="#"
+                    onClick={handleSeeAllClick}
+                  >
+                    Xem tất cả
+                  </a>
+                )}
               </div>
               <div className="bg-white p-3 rating-review-select-page rounded shadow-sm">
-                <h6 className="mb-3">Leave Comment</h6>
+                <h6 className="mb-3"> Đánh giá sản phẩm</h6>
                 <div className="d-flex align-items-center mb-3">
-                  <p className="m-0 small">Rate the Place</p>
+                  <p className="m-0 small"> Chọn số sao</p>
                   <div className="star-rating ml-auto">
                     <div className="d-inline-block">
                       {[1, 2, 3, 4, 5].map((star) => (
