@@ -1,9 +1,9 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { fetchCouponById } from "../../../features/coupons/couponSlice";
 import { fetchDetailsOrder } from "../../../features/order/orderSlice";
 import { formatMoney } from "../../../utils/formatMoney";
-import { fetchCouponById } from "../../../features/coupons/couponSlice";
 const OrderDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,12 +30,6 @@ const OrderDetail = () => {
                   <i className="feather-calendar text-primary"></i>{" "}
                   {new Date(order?.order?.updated_at).toLocaleString()}
                 </p>
-                <a
-                  href="review.html"
-                  className="text-primary ml-auto text-decoration-none"
-                >
-                  Review
-                </a>
               </div>
 
               <div className="p-3 border-bottom bg-white">
@@ -53,8 +47,9 @@ const OrderDetail = () => {
                       className="img-fluid sc-osahan-logo mr-2"
                     />{" "}
                     <span className="text-primary font-weight-bold d-flex align-items-center justify-content-between ">
-                      <div>{item.food.name}</div>
+                      <div>{item.food.name} </div>
                       <div>
+                        {item.quantity} x {formatMoney(item.food.price)} ={" "}
                         {formatMoney(item.food.price * item.quantity)}
                       </div>
                     </span>
@@ -83,19 +78,51 @@ const OrderDetail = () => {
                     <div className="media align-items-center">
                       <div className="mr-2">&middot;</div>
                       <div className="media-body">
-                        <p className="m-0">Mã giảm giá : {coupon?.code }</p>
+                        <p className="m-0">
+                          {" "}
+                          Mã giảm giá : {order?.order?.coupon}{" "}
+                        </p>
                       </div>
                     </div>
-                    
+                    <div className="d-flex align-items-center">
+                      <p className="text-gray mb-0 float-right ml-2 ">
+                        {formatMoney(
+                          order?.detailOrders?.reduce(
+                            (total, item) =>
+                              total +
+                              item?.food?.price * item.quantity +
+                              item?.toppings?.reduce(
+                                (total, topping) => total + topping?.price,
+                                0
+                              ),
+                            0
+                          ) -
+                            30000 -
+                            order?.order?.amount
+                        )}
+                      </p>
+                    </div>
                   </div>
                 )}
+                <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
+                  <div className="media align-items-center">
+                    <div className="mr-2">&middot;</div>
+                    <div className="media-body">
+                      <p className="m-0">Tiền ship</p>
+                    </div>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <p className="text-gray mb-0 float-right ml-2 text-success">
+                      + {formatMoney(30000)}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="p-3 bg-white">
                 <div className="d-flex align-items-center mb-2">
                   <h6 className="font-weight-bold mb-1">Tổng tiền</h6>
                   <h6 className="font-weight-bold ml-auto mb-1">
-                    {" "}
                     {formatMoney(order.order?.amount)}
                   </h6>
                 </div>
