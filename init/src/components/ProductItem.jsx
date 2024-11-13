@@ -29,8 +29,8 @@ const ProductItem = ({ food }) => {
                 className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2 d-flex   justify-content-start align-items-center"
                 style={{ gap: "5px" }}
               >
-                <FaRegClock className="feather-clock" />
-                15–25 min
+                <FaRegClock className="feather-clock mr-1" size={16} />
+                <span>{food?.cooking_time} </span>
               </span>
               <span className="float-right text-black-50 ">
                 {" "}
@@ -39,8 +39,9 @@ const ProductItem = ({ food }) => {
             </p>
           </div>
           <div className="list-card-badge">
-            <small>{food?.category?.name || " OSAHAN50"}</small>
+            <small>{food?.category?.name}</small>
           </div>
+          <p>Đã bán {food?.sold}</p>
         </div>
       </div>
     </div>

@@ -22,7 +22,8 @@ const Foods = () => {
   const [comment, setComment] = useState("");
   const { food } = useSelector((state) => state.foods);
   const { ratings, avgStar } = useSelector((state) => state.rating);
-  const [showAllReviews, setShowAllReviews] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 5;
 
   useEffect(() => {
     dispatch(fetchDetailsFoods(param.id));
@@ -136,10 +137,15 @@ const Foods = () => {
       },
     ],
   };
-  const handleSeeAllClick = () => {
-    setShowAllReviews(true);
+  
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
-  const reviewsToShow = showAllReviews ? ratings : ratings.slice(0, 2);
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = ratings.slice(indexOfFirstReview, indexOfLastReview);
+
+  const totalPages = Math.ceil(ratings.length / reviewsPerPage);
 
   return (
     <>
@@ -166,7 +172,10 @@ const Foods = () => {
                 />
               ))}
               {avgStar > 0 ? (
-                <span className="text-warning ml-2"> {ratings.length} đánh giá</span>
+                <span className="text-warning ml-2">
+                  {" "}
+                  {ratings.length} đánh giá
+                </span>
               ) : (
                 <span className="text-white ml-2">Chưa có đánh giá</span>
               )}
@@ -350,8 +359,8 @@ const Foods = () => {
                   Đánh giá cao nhất
                 </a>
                 <h6 className="mb-1"> Đánh giá và bình luận</h6>
-                {reviewsToShow &&
-                  reviewsToShow.map((rating, index) => (
+                {currentReviews &&
+                  currentReviews.map((rating, index) => (
                     <>
                       <div className="reviews-members py-3" key={index}>
                         <div className="media">
@@ -394,15 +403,19 @@ const Foods = () => {
                       <hr />
                     </>
                   ))}
-                {!showAllReviews && ratings.length > 2 && (
-                  <a
-                    className="text-center w-100 d-block mt-3 font-weight-bold"
-                    href="#"
-                    onClick={handleSeeAllClick}
-                  >
-                    Xem tất cả
-                  </a>
-                )}
+                <div className="pagination">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index + 1}
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`btn ${
+                        currentPage === index + 1 ? "btn-primary" : "btn-light"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div className="bg-white p-3 rating-review-select-page rounded shadow-sm">
                 <h6 className="mb-3"> Đánh giá sản phẩm</h6>

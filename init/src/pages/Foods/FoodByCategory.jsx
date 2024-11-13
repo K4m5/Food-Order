@@ -68,6 +68,8 @@ const FoodByCategory = () => {
         return a.name.localeCompare(b.name);
       } else if (priceFilter === "nameZtoA") {
         return b.name.localeCompare(a.name);
+      } else if (priceFilter === "sold") {
+        return b.sold - a.sold;
       }
       return 0;
     });
@@ -276,6 +278,22 @@ const FoodByCategory = () => {
                     >
                       Tên từ z-a
                     </label>
+                  </div> 
+                  <div className="custom-control border-bottom px-0 custom-radio">
+                    <input
+                      type="radio"
+                      id="sold"
+                      name="priceFilter"
+                      value="sold"
+                      className="custom-control-input"
+                      onChange={handlePriceFilterChange}
+                    />
+                    <label
+                      className="custom-control-label py-3 w-100 px-3"
+                      htmlFor="sold"
+                    >
+                     Số lượng bán
+                    </label>
                   </div>
                   <div className="p-3 bg-light border-bottom">
                     <h6 className="m-0">Khoảng giá</h6>
@@ -286,7 +304,6 @@ const FoodByCategory = () => {
                       min={minPrice}
                       max={maxPrice}
                       step={50000}
-                      
                       onChange={handlePriceRangeChange}
                       value={priceRange}
                       style={{

@@ -20,7 +20,6 @@ import { formatMoney } from "../../utils/formatMoney";
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { coupons } = useSelector((state) => state.coupons);
-  const { status } = useSelector((state) => state.orders);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
@@ -71,27 +70,7 @@ function Checkout() {
     }
   };
   // random code
-  const handleApplyDiscount = () => {
-    // kiểm tra xem có mã giảm giá nào được nhập không
-    // nếu không thì thông báo lỗi
-    if (!discountCode) {
-      toast.error("Vui lòng nhập mã giảm giá");
-      return;
-    }
 
-    const coupon = coupons.find(
-      (coupon) => coupon.code.toString() == discountCode.toString()
-    );
-
-    if (!coupon) {
-      toast.error("Mã giảm giá không tồn tại");
-      return;
-    } else {
-      toast.success("Áp dụng mã giảm giá thành công");
-    }
-
-    setDiscount(coupon.value);
-  };
   const calculateTotal = () => {
     const total = items.reduce((total, cart) => {
       const foodPrice = cart.food.price * cart.quantity;
@@ -102,7 +81,7 @@ function Checkout() {
       return total + foodPrice + toppingPrice;
     }, 0);
 
-    return total - 30000 - (total * discount) / 100;
+    return total - (total * discount) / 100;
   };
   const totalMoney = () => {
     const total = items.reduce((total, cart) => {
@@ -154,7 +133,7 @@ function Checkout() {
       await dispatch(createOrder(orderData)).unwrap();
       navigate("/orderSuccess");
     } catch (error) {
-       console.log(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -429,11 +408,7 @@ function Checkout() {
                     onChange={(e) => setDiscountCode(e.target.value)}
                   />
                   <div className="input-group-append">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={handleApplyDiscount}
-                    >
+                    <button type="button" className="btn btn-primary">
                       <FaPercent className="mr-2" />
                       Áp dụng
                     </button>
@@ -455,12 +430,6 @@ function Checkout() {
                   </span>
                 </p>
                 {/* tiền ship */}
-                <p className="mb-1 text-danger">
-                  Phí ship
-                  <span className="float-right text-danger">
-                    - {formatMoney(30000)}
-                  </span>
-                </p>
 
                 <p className="mb-1 text-success">
                   Tổng

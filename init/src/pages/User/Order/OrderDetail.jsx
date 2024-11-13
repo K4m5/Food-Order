@@ -84,7 +84,7 @@ const OrderDetail = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="d-flex align-items-center">
+                    {/* <div className="d-flex align-items-center">
                       <p className="text-gray mb-0 float-right ml-2 ">
                         {formatMoney(
                           order?.detailOrders?.reduce(
@@ -96,15 +96,13 @@ const OrderDetail = () => {
                                 0
                               ),
                             0
-                          ) -
-                            30000 -
-                            order?.order?.amount
+                          ) - order?.order?.amount
                         )}
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 )}
-                <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
+                {/* <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
                   <div className="media align-items-center">
                     <div className="mr-2">&middot;</div>
                     <div className="media-body">
@@ -116,7 +114,7 @@ const OrderDetail = () => {
                       + {formatMoney(30000)}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="p-3 bg-white">

@@ -1,8 +1,16 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {
+  Circle,
+  LayerGroup,
+  MapContainer,
+  Marker,
+  Polyline,
+  Popup,
+  TileLayer,
+} from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { SidebarContext } from "../../context/SidebarContext";
 import {
@@ -41,6 +49,14 @@ const Map = () => {
     setSelectedOrder(true);
     dispatch(fetchDetailsOrder(id));
   };
+  const greenOptions = { color: "green", fillColor: "green" };
+  const polyline = [
+    [51.505, -0.09],
+    [51.51, -0.1],
+    [51.51, -0.12],
+  ];
+  const limeOptions = { color: "lime" };
+
   return (
     <>
       <div className="d-none">
@@ -63,22 +79,62 @@ const Map = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             {ordersWithCoordinates.map((order, index) => (
-              <Marker
-                key={index}
-                icon={customIcon} // Use custom icon
-                position={[order.coordinates.lat, order.coordinates.lon]}
-                eventHandlers={{
-                  click: () => handleMarkerClick(order._id),
-                }}
-              >
-                <Popup>
-                  <div>
-                    <p>{order.name}</p>
-                    <p>{order.address}</p>
-                  </div>
-                </Popup>
-              </Marker>
+              <React.Fragment key={index}>
+                <LayerGroup>
+                  <Circle
+                    center={[order.coordinates.lat, order.coordinates.lon]}
+                    pathOptions={greenOptions}
+                    radius={100}
+                  />
+                </LayerGroup>
+
+                <LayerGroup>
+                  <Circle
+                    center={[center[0], center[1]]}
+                    pathOptions={greenOptions}
+                    radius={100}
+                  />
+                </LayerGroup>
+
+                <Marker
+                  key={index}
+                  icon={customIcon} // Use custom icon
+                  position={[order.coordinates.lat, order.coordinates.lon]}
+                  eventHandlers={{
+                    click: () => handleMarkerClick(order._id),
+                  }}
+                >
+                  <Popup>
+                    <div>
+                      <p>{order.name}</p>
+                      <p>{order.address}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+                <Polyline
+                  pathOptions={limeOptions}
+                  positions={
+                    order.coordinates.lat > 0
+                      ? [
+                          [order.coordinates.lat, order.coordinates.lon],
+                          [center[0], center[1]],
+                        ]
+                      : []
+                  }
+                />
+              </React.Fragment>
             ))}
+            <Marker
+              icon={customIcon} // Use custom icon
+              position={[center[0], center[1]]}
+            >
+              <Popup>
+                <div>
+                  <p>Cửa hàng</p>
+                  <p>Đây là địa chỉ cửa hàng</p>
+                </div>
+              </Popup>
+            </Marker>
           </MapContainer>
           {/* Order Details
            */}
@@ -116,8 +172,8 @@ const Map = () => {
                             {order.order.status === "Pending" && "Đang chờ"}
                             {order.order.status === "Completed" && "Đã giao"}
                             {order.order.status === "Cancelled" && "Đã hủy"}
-                            {order.order.status === "Processing" && "Đang xử lý"}
-
+                            {order.order.status === "Processing" &&
+                              "Đang xử lý"}
                           </p>
                           <p className="small font-weight-bold text-center">
                             <i className="feather-clock"></i>{" "}
