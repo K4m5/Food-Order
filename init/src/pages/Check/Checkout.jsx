@@ -20,7 +20,7 @@ import { formatMoney } from "../../utils/formatMoney";
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { coupons } = useSelector((state) => state.coupons);
-  const { user } = useSelector((state) => state.user);
+   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
   const [discountCode, setDiscountCode] = useState("");
@@ -70,27 +70,52 @@ function Checkout() {
     }
   };
   // random code
+  const handleApplyDiscount = () => {
+    // kiểm tra xem có mã giảm giá nào được nhập không
+    // nếu không thì thông báo lỗi
+    if (!discountCode) {
+      toast.error("Vui lòng nhập mã giảm giá");
+      return;
+    }
 
+    const coupon = coupons.find(
+      (coupon) => coupon.code.toString() == discountCode.toString()
+    );
+    if(coupon.quantity <= 0){
+      toast.error("Mã giảm giá đã hết lượt sử dụng");
+      return;
+    }
+    
+
+    if (!coupon) {
+      toast.error("Mã giảm giá không tồn tại");
+      return;
+    } else {
+      toast.success("Áp dụng mã giảm giá thành công");
+    }
+
+    setDiscount(coupon.value);
+  };
   const calculateTotal = () => {
     const total = items.reduce((total, cart) => {
-      const foodPrice = cart.food.price * cart.quantity;
+      
       const toppingPrice = cart.toppings.reduce(
         (toppingTotal, topping) => toppingTotal + topping.price,
         0
       );
-      return total + foodPrice + toppingPrice;
+      return total + (cart.food.price + toppingPrice) *cart.quantity;
     }, 0);
 
-    return total - (total * discount) / 100;
+    return total   - (total * discount) / 100;
   };
   const totalMoney = () => {
     const total = items.reduce((total, cart) => {
-      const foodPrice = cart.food.price * cart.quantity;
+      
       const toppingPrice = cart.toppings.reduce(
         (toppingTotal, topping) => toppingTotal + topping.price,
         0
       );
-      return total + foodPrice + toppingPrice;
+      return total + (cart.food.price + toppingPrice) *cart.quantity;
     }, 0);
 
     return total;
@@ -133,7 +158,7 @@ function Checkout() {
       await dispatch(createOrder(orderData)).unwrap();
       navigate("/orderSuccess");
     } catch (error) {
-      console.log(error);
+       console.log(error);
     } finally {
       setLoading(false);
     }
@@ -408,7 +433,11 @@ function Checkout() {
                     onChange={(e) => setDiscountCode(e.target.value)}
                   />
                   <div className="input-group-append">
-                    <button type="button" className="btn btn-primary">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleApplyDiscount}
+                    >
                       <FaPercent className="mr-2" />
                       Áp dụng
                     </button>
@@ -430,6 +459,7 @@ function Checkout() {
                   </span>
                 </p>
                 {/* tiền ship */}
+             
 
                 <p className="mb-1 text-success">
                   Tổng

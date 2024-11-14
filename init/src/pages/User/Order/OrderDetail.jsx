@@ -77,12 +77,12 @@ const OrderDetail = () => {
                   <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
                     <div className="media align-items-center">
                       <div className="mr-2">&middot;</div>
-                      <div className="media-body">
-                        <p className="m-0">
-                          {" "}
-                          Mã giảm giá : {order?.order?.coupon}{" "}
-                        </p>
+                      <div className=" active  ">
+                        <p className="m-0"> Mã giảm giá : {coupon?.code} </p>
                       </div>
+                    </div>
+                    <div>
+                      Giảm giá : {coupon?.value}%
                     </div>
                     {/* <div className="d-flex align-items-center">
                       <p className="text-gray mb-0 float-right ml-2 ">
