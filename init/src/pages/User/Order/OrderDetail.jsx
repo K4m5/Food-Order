@@ -48,10 +48,10 @@ const OrderDetail = () => {
                     />{" "}
                     <span className="text-primary font-weight-bold d-flex align-items-center justify-content-between ">
                       <div>{item.food.name} </div>
-                      <div>
-                        {item.quantity} x {formatMoney(item.food.price)} ={" "}
-                        {formatMoney(item.food.price * item.quantity)}
-                      </div>
+                      <div>{formatMoney(item.food.price)}</div>
+                    </span>
+                    <span className="text-muted small">
+                      Số lượng: {item.quantity}
                     </span>
                     {item.toppings.map((topping, i) => (
                       <div
