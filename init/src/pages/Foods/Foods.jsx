@@ -68,7 +68,7 @@ const Foods = () => {
       (total, item) => total + (item?.topping?.price || 0),
       0
     );
-    return foodPrice * quantity + toppingsPrice;
+    return (foodPrice + toppingsPrice) * quantity;
   };
   const handleRatingSubmit = async () => {
     const isLoggedIn = localStorage.getItem("accessToken");
