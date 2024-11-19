@@ -263,7 +263,7 @@ const Foods = () => {
       </div>
       <div className="container">
         <div className="">
-          <p className="font-weight-bold pt-4 m-0">MẶT HÀNG NỔI BẬT</p>
+          <p className="font-weight-bold pt-4 m-0">TOPPING</p>
           <div className="trending-slider rounded">
             <Slider {...settingTrendding}>
               {foodToppings &&

@@ -32,7 +32,10 @@ const Map = () => {
 
   useEffect(() => {
     const fetchCoordinates = async () => {
-      const result = await fetchOrderCoordinates(orders);
+      const filteredOrders = orders.filter(
+        (order) => order.status === "Pending" || order.status === "Processing"
+      );
+      const result = await fetchOrderCoordinates(filteredOrders);
       setOrdersWithCoordinates(result);
     };
 
