@@ -12,7 +12,10 @@ const ProductItem = ({ food }) => {
               alt="#"
               src={food?.image || "img/trending3.png"}
               className="img-fluid item-img w-100 "
-              style={{ height: "200px" }}
+              style={{
+                height: "200px",
+                objectFit: "cover",
+              }}
             />
           </Link>
         </div>

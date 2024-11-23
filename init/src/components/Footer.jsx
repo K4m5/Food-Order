@@ -82,7 +82,7 @@ const Footer = () => {
                     />
                   </div>
                   <div>
-                    <h6 className="title text-white">Liên hệ</h6>
+                    <h6 className="title text-white">Food</h6>
                     <p className="text-muted">
                       Đây là trang web cho phép mọi người có thể mua sắm đồ ăn
                       uống
@@ -125,31 +125,14 @@ const Footer = () => {
                 </article>
               </aside>
               <aside className="col-sm-3 col-md-2 text-white">
-                <h6 className="title">Trang lỗi</h6>
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="not-found" className="text-muted">
-                      Không tìm thấy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="maintence" className="text-muted">
-                      Bảo trì
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="coming-soon" className="text-muted">
-                      Đang phát triển
-                    </Link>
-                  </li>
-                </ul>
+               
               </aside>
               <aside className="col-sm-3 col-md-2 text-white">
                 <h6 className="title">Dịch vụ</h6>
                 <ul className="list-unstyled hov_footer">
                   <li>
                     <Link to="/faq" className="text-muted">
-                      Hỗ trợ giao hàng
+                      Câu hỏi thường gặp
                     </Link>
                   </li>
                   <li>
@@ -182,16 +165,6 @@ const Footer = () => {
                       Đăng ký
                     </Link>
                   </li>
-                  <li>
-                    <Link to="forgot" className="text-muted">
-                      Quên mật khẩu
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="profile" className="text-muted">
-                      Tài khoản
-                    </Link>
-                  </li>
                 </ul>
               </aside>
               <aside className="col-sm-3  col-md-2 text-white">
@@ -202,196 +175,7 @@ const Footer = () => {
                       Xu hướng
                     </Link>
                   </li>
-                  <li>
-                    <Link to="most_popular" className="text-muted">
-                      Phổ biến
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="restaurant" className="text-muted">
-                      Chi tiết
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="favorites" className="text-muted">
-                      Yêu thích
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-            </div>
-          </section>
-
-          <section className="footer-center border-top padding-y py-5">
-            <h6 className="title text-white">Quốc gia</h6>
-            <div className="row">
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Việt Nam
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Indonesia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Ireland
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Italy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Lebanon
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Malaysia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      New Zealand
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Philippines
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Poland
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Portugal
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Australia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Brasil
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Canada
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Chile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Czech Republic
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Turkey
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      UAE
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      United Kingdom
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      United States
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Sri Lanka
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Qatar
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Singapore
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Slovakia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      South Africa
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Green Land
-                    </Link>
-                  </li>
-                </ul>
-              </aside>
-              <aside className="col-sm-2 col-md-2 text-white">
-                <ul className="list-unstyled hov_footer">
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Pakistan
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Bangladesh
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Bhutaan
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="#" className="text-muted">
-                      Nepal
-                    </Link>
-                  </li>
+                  
                 </ul>
               </aside>
             </div>
@@ -400,7 +184,6 @@ const Footer = () => {
 
         <section className="footer-copyright border-top py-3 bg-light">
           <div className="container d-flex align-items-center">
-            <p className="mb-0"> © 2024 Company All rights reserved </p>
             <p className="text-muted mb-0 ml-auto d-flex align-items-center">
               <Link to="#" className="d-block">
                 <img alt="#" src="img/appstore.png" height="40" />
