@@ -21,7 +21,7 @@ const Navbar = () => {
       <nav id="main-nav">
         <ul className="second-nav">
           <li>
-            <Link to="home">
+            <Link to="">
               <i className="feather-home mr-2"></i> Trang chủ
             </Link>
           </li>

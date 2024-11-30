@@ -84,37 +84,8 @@ const OrderDetail = () => {
                     <div>
                       Giảm giá : {coupon?.value}%
                     </div>
-                    {/* <div className="d-flex align-items-center">
-                      <p className="text-gray mb-0 float-right ml-2 ">
-                        {formatMoney(
-                          order?.detailOrders?.reduce(
-                            (total, item) =>
-                              total +
-                              item?.food?.price * item.quantity +
-                              item?.toppings?.reduce(
-                                (total, topping) => total + topping?.price,
-                                0
-                              ),
-                            0
-                          ) - order?.order?.amount
-                        )}
-                      </p>
-                    </div> */}
                   </div>
                 )}
-                {/* <div className="gold-members d-flex align-items-center justify-content-between   py-2 border-bottom">
-                  <div className="media align-items-center">
-                    <div className="mr-2">&middot;</div>
-                    <div className="media-body">
-                      <p className="m-0">Tiền ship</p>
-                    </div>
-                  </div>
-                  <div className="d-flex align-items-center">
-                    <p className="text-gray mb-0 float-right ml-2 text-success">
-                      + {formatMoney(30000)}
-                    </p>
-                  </div>
-                </div> */}
               </div>
 
               <div className="p-3 bg-white">

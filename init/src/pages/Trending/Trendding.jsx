@@ -114,6 +114,7 @@ const Tredding = () => {
               <div className="col-md-12">
                 <nav>
                   <ul className="pagination">
+                    {/* Nút Prev */}
                     <li className={`page-item ${!prev ? "disabled" : ""}`}>
                       <button
                         className="page-link"
@@ -123,21 +124,65 @@ const Tredding = () => {
                         Prev
                       </button>
                     </li>
-                    {[...Array(totalPages)].map((_, index) => (
-                      <li
-                        key={index}
-                        className={`page-item ${
-                          index + 1 === currentPage ? "active" : ""
-                        }`}
-                      >
-                        <button
-                          className="page-link"
-                          onClick={() => handlePageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      </li>
-                    ))}
+
+                    {/* Hiển thị nút đầu tiên và dấu ... nếu cần */}
+                    {currentPage > 2 && (
+                      <>
+                        <li className="page-item">
+                          <button className="page-link" onClick={() => handlePageChange(1)}>
+                            1
+                          </button>
+                        </li>
+                        {currentPage > 3 && (
+                          <li className="page-item disabled">
+                            <span className="page-link">...</span>
+                          </li>
+                        )}
+                      </>
+                    )}
+
+                    {/* Hiển thị các trang lân cận trang hiện tại */}
+                    {Array.from({ length: 3 }, (_, i) => {
+                      const pageNumber = currentPage - 1 + i;
+                      if (pageNumber > 0 && pageNumber <= totalPages) {
+                        return (
+                          <li
+                            key={pageNumber}
+                            className={`page-item ${
+                              pageNumber === currentPage ? "active" : ""
+                            }`}
+                          >
+                            <button
+                              className="page-link"
+                              onClick={() => handlePageChange(pageNumber)}
+                            >
+                              {pageNumber}
+                            </button>
+                          </li>
+                        );
+                      }
+                      return null;
+                    })}
+
+                    {/* Hiển thị dấu ... và nút cuối cùng nếu cần */}
+                    {currentPage < totalPages - 1 && (
+                      <>
+                        {currentPage < totalPages - 2 && (
+                          <li className="page-item disabled">
+                            <span className="page-link">...</span>
+                          </li>
+                        )}
+                        <li className="page-item">
+                          <button
+                            className="page-link"
+                            onClick={() => handlePageChange(totalPages)}
+                          >
+                            {totalPages}
+                          </button>
+                        </li>
+                      </>
+                    )}
+                    
                     <li className={`page-item ${!next ? "disabled" : ""}`}>
                       <button
                         className="page-link"
@@ -252,7 +297,7 @@ const Tredding = () => {
                       type="radio"
                       id="sold"
                       name="priceFilter"
-                      value="none"
+                      value="sold"
                       className="custom-control-input"
                       onChange={handlePriceFilterChange}
                     />

@@ -82,7 +82,7 @@ const initialState = {
   totalPages: 1,
   next: null,
   prev: null,
-  order: {},
+  order: {}, // lưu thông tin chi tiết đơn hàng
   isUpdated: false,
 };
 export const cancelOrder = createAsyncThunk(
@@ -133,7 +133,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchDetailsOrder.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.order = action.payload;
+        state.order = action.payload; 
         state.error = null;
       })
       .addCase(fetchDetailsOrder.rejected, (state, action) => {

@@ -20,7 +20,7 @@ import { formatMoney } from "../../utils/formatMoney";
 function Checkout() {
   const { items } = useSelector((state) => state.cart);
   const { coupons } = useSelector((state) => state.coupons);
-   const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [discount, setDiscount] = useState(0);
   const [discountCode, setDiscountCode] = useState("");
@@ -69,7 +69,7 @@ function Checkout() {
       toast.error("Số lượng phải lớn hơn 0");
     }
   };
-  // random code
+  
   const handleApplyDiscount = () => {
     // kiểm tra xem có mã giảm giá nào được nhập không
     // nếu không thì thông báo lỗi
