@@ -40,9 +40,6 @@ const Navbar = () => {
                   <Link to="profile">Tài khoản</Link>
                 </li>
                 <li>
-                  <Link to="favorites">Hỗ trợ giao hàng</Link>
-                </li>
-                <li>
                   <Link to="contact">Liên hệ</Link>
                 </li>
                 <li>

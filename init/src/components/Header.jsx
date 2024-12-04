@@ -90,98 +90,10 @@ const Header = () => {
         <section className="header-main shadow-sm bg-white py-3">
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-1">
+              <div className="col-4">
                 <Link to="/" className="brand-wrap mb-0">
                   <img alt="#" className="img-fluid" src="img/logo_web.png" />
                 </Link>
-              </div>
-              <div className="col-3 d-flex align-items-center m-none">
-                <div className="dropdown mr-3">
-                  <Link
-                    className="text-dark dropdown-toggle d-flex align-items-center py-3"
-                    to="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <div>
-                      <RiMapPinLine className="mr-2" />
-                    </div>
-
-                    <div>
-                      {selectedProvince || userAddress || "Chọn địa chỉ"}
-                    </div>
-                  </Link>
-                  <div
-                    className="dropdown-menu p-0 drop-loc"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <div className="osahan-country">
-                      <div className="search_location bg-primary p-3 text-right">
-                        <div className="input-group rounded shadow-sm overflow-hidden">
-                          <div className="input-group-prepend">
-                            <button className="border-0 btn btn-outline-secondary text-dark bg-white btn-block">
-                              <CiSearch />
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            className="shadow-none border-0 form-control"
-                            placeholder="Tìm kiếm"
-                            name="search"
-                            value={searchTerm}
-                            onChange={handleSearchChange}
-                          />
-                        </div>
-                      </div>
-                      <div className="p-3 border-bottom">
-                        <div
-                          className="text-decoration-none cursor-pointer"
-                          style={{
-                            color: "black",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => setSelectedProvince(userAddress)}
-                        >
-                          <p className="font-weight-bold text-primary m-0">
-                            <IoNavigate className="mr-2" />
-
-                            {userAddress || "Chọn địa chỉ"}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="filter">
-                        <h6 className="px-3 py-3 bg-light pb-1 m-0 border-bottom">
-                          Chọn tỉnh/thành phố
-                        </h6>
-                        {searchFilter.map((province, index) => (
-                          <div
-                            key={index}
-                            className="custom-control border-bottom px-0 custom-radio"
-                          >
-                            <input
-                              type="radio"
-                              id={`customRadio${index}`}
-                              name="location"
-                              className="custom-control-input"
-                              value={province.name}
-                              onChange={handleProvinceChange}
-                              checked={selectedProvince === province.name}
-                            />
-                            <label
-                              className="custom-control-label py-3 w-100 px-3"
-                              htmlFor={`customRadio${index}`}
-                            >
-                              {province.name}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div className="col-8">

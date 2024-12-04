@@ -89,10 +89,28 @@ const OrderDetail = () => {
               </div>
 
               <div className="p-3 bg-white">
+              <div className="d-flex align-items-center mb-2">
+                  <h6 className="font-weight-bold mb-1">Thanh toán</h6>
+                  <h6 className="font-weight-bold ml-auto mb-1">
+                    {order?.order?.payment == "Cod" ? "Tiền Mặt" : "Chuyển Khoản"}
+                  </h6>
+                </div>
+                <div className="d-flex align-items-center mb-2">
+                  <h6 className="font-weight-bold mb-1">Tạm tính</h6>
+                  <h6 className="font-weight-bold ml-auto mb-1">
+                    {formatMoney(order.order?.amount)}
+                  </h6>
+                </div>
+                <div className="d-flex align-items-center mb-2">
+                  <h6 className="mb-1">Phí giao hàng</h6>
+                  <h6 className="ml-auto mb-1">
+                    {formatMoney(order.order?.ship ? order.order?.ship : 0)}
+                  </h6>
+                </div>
                 <div className="d-flex align-items-center mb-2">
                   <h6 className="font-weight-bold mb-1">Tổng tiền</h6>
                   <h6 className="font-weight-bold ml-auto mb-1">
-                    {formatMoney(order.order?.amount)}
+                    {formatMoney(order.order?.amount + (order.order?.ship ? order.order?.ship : 0))}
                   </h6>
                 </div>
                 <p className="m-0 small text-muted">

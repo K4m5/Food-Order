@@ -35,7 +35,6 @@ const BannerMain = () => {
   useEffect(() => {
     dispatch(fetchBanners(1, 10));
   }, [dispatch]);
-  console.log(banners);
   return (
     <div className="bg-white">
       <div className="container">

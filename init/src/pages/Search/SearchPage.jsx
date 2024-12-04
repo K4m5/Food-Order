@@ -1,4 +1,4 @@
-import   { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaBars, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -10,7 +10,7 @@ const SearchPage = () => {
   const { toggleSidebar } = useContext(SidebarContext);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-   const foods = useSelector((state) => state.foods.foods);
+  const foods = useSelector((state) => state.foods.foods);
   const searchStatus = useSelector((state) => state.foods.status);
   const {currentPage, totalPages, next, prev} = useSelector((state) => state.foods);
  

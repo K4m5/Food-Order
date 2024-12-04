@@ -73,7 +73,7 @@ const MyOrder = () => {
               Tổng tiền
               <br />
               <span className="text-dark font-weight-bold">
-                {formatMoney(order.amount)}
+                {formatMoney(order.amount + (order.ship ? order.ship : 0))}
               </span>
             </div>
             <div className="text-end">

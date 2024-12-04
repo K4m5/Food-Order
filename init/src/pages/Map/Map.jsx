@@ -71,7 +71,7 @@ const Map = () => {
     <>
       <div className="d-none">
         <div className="bg-primary border-bottom p-3 d-flex align-items-center justify-content-between">
-          <h4 className="font-weight-bold m-0 text-white">Ưu đãi</h4>
+          <h4 className="font-weight-bold m-0 text-white">Bản đồ</h4>
           <div onClick={toggleSidebar}>
             <FaBars size={24} color="white" />
           </div>
@@ -150,9 +150,6 @@ const Map = () => {
            */}
           {selectedOrder && (
             <div className="container pt-5 pb-5">
-              <div className="row d-flex align-items-center">
-                Chi tiết đơn hàng
-              </div>
               <div className="order-body">
                 <div className="pb-3">
                   <section className="bg-white osahan-main-body rounded shadow-sm overflow-hidden">
@@ -206,17 +203,45 @@ const Map = () => {
                           </Fragment>
                         ))}
                       </div>
-
                       <div className="p-3 bg-white">
                         <div className="d-flex align-items-center mb-2">
-                          <h6 className="font-weight-bold mb-1">Tổng tiền</h6>
+                          <h6 className="font-weight-bold mb-1">Phương thức</h6>
+                          <h6 className="font-weight-bold ml-auto mb-1">
+                            {order?.order?.payment == "Cod" ? "Tiền Mặt" : "Chuyển Khoản"}
+                          </h6>
+                        </div>
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="font-weight-bold mb-1">Tạm tính</h6>
                           <h6 className="font-weight-bold ml-auto mb-1">
                             {formatMoney(order.order?.amount)}
                           </h6>
                         </div>
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="mb-1 text-muted" style={{ fontWeight: 'normal' }}>Quãng đường</h6>
+                          <h6 className="ml-auto mb-1 text-muted" style={{ fontWeight: 'normal' }}>
+                            {order.order?.distance ? order.order?.distance : "0 km"}
+                          </h6>
+                        </div>
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="mb-1 text-muted" style={{ fontWeight: 'normal' }}>Thời gian giao</h6>
+                          <h6 className="ml-auto mb-1 text-muted" style={{ fontWeight: 'normal' }}>
+                            {order.order?.timeShip ? order.order?.timeShip : "0 phút"}
+                          </h6>
+                        </div>
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="mb-1">Phí giao hàng</h6>
+                          <h6 className="ml-auto mb-1">
+                            +{formatMoney(order.order?.ship ? order.order?.ship : 0)}
+                          </h6>
+                        </div>
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="font-weight-bold mb-1">Tổng tiền</h6>
+                          <h6 className="font-weight-bold ml-auto mb-1">
+                            {formatMoney(order.order?.amount + (order.order?.ship ? order.order?.ship : 0))}
+                          </h6>
+                        </div>
                         <p className="m-0 small text-muted">
-                          Bạn có thể kiểm tra chi tiết đơn hàng của mình tại
-                          đây,
+                          Bạn có thể kiểm tra chi tiết đơn hàng của mình tại đây,
                           <br />
                           Cảm ơn bạn đã đặt hàng.
                         </p>

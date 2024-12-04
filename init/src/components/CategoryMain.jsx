@@ -37,7 +37,6 @@ const CategoryMain = () => {
   useEffect(() => {
     dispatch(fetchCategories(1, 10));
   }, [dispatch]);
-  console.log(categories.length);
   return (
     <div className="container">
       <div>

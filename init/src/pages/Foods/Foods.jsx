@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { FaChevronDown, FaMapMarkerAlt, FaRegStar } from "react-icons/fa";
 import { MdOutlineDriveFolderUpload } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import baseApi from "../../api/baseApi";
 import { addItemToCart } from "../../features/cart/cartSlice";
@@ -14,6 +14,7 @@ import { formatMoney } from "../../utils/formatMoney";
 const Foods = () => {
   const param = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [foodToppings, setFoodToppings] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -113,6 +114,12 @@ const Foods = () => {
       })
     );
   };
+
+  const handleNavigate = () => {
+    navigate('/contact');
+  };
+
+
   const settingTrendding = {
     slidesToShow: 3,
     arrows: true,
@@ -255,7 +262,7 @@ const Foods = () => {
                 </i>
               </a>
             </div>
-            <a href="contact" className="btn btn-sm btn-outline-light ml-auto">
+            <a href="contact" className="btn btn-sm btn-outline-light ml-auto" onClick={handleNavigate}>
               Liên hệ
             </a>
           </div>
@@ -355,14 +362,10 @@ const Foods = () => {
                 </div>
               </div>
               <div className="bg-white p-3 mb-3 restaurant-detailed-ratings-and-reviews shadow-sm rounded">
-                <a className="text-primary float-right" href="#">
-                  Đánh giá cao nhất
-                </a>
                 <h6 className="mb-1"> Đánh giá và bình luận</h6>
-                {currentReviews &&
-                  currentReviews.map((rating, index) => (
-                    <>
-                      <div className="reviews-members py-3" key={index}>
+                {currentReviews && currentReviews.map((rating, index) => (
+                    <div key={`review-${index}`}>
+                      <div className="reviews-members py-3">
                         <div className="media">
                           <div className="media-body">
                             <div className="reviews-members-header">
@@ -373,11 +376,9 @@ const Foods = () => {
                                 >
                                   {[1, 2, 3, 4, 5].map((star) => (
                                     <FaRegStar
-                                      key={star}
+                                      key={`star-${index}-${star}`}
                                       className={`feather-star ${
-                                        star <= rating.star
-                                          ? "text-warning"
-                                          : ""
+                                        star <= rating.star ? "text-warning" : ""
                                       }`}
                                     />
                                   ))}
@@ -389,9 +390,7 @@ const Foods = () => {
                                 </a>
                               </h6>
                               <p className="text-muted small">
-                                {new Date(
-                                  rating.created_at
-                                ).toLocaleDateString()}
+                                {new Date(rating.created_at).toLocaleDateString()}
                               </p>
                             </div>
                             <div className="reviews-members-body">
@@ -400,9 +399,10 @@ const Foods = () => {
                           </div>
                         </div>
                       </div>
-                      <hr />
-                    </>
+                      <hr key={`hr-${index}`} />
+                    </div>
                   ))}
+
                 <div className="pagination">
                   {Array.from({ length: totalPages }, (_, index) => (
                     <button

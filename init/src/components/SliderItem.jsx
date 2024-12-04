@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const SliderItem = ({ banner }) => {
-  console.log(banner)
   return (
     <div className="cat-item px-1 py-3">
       <Link className="d-block text-center shadow-sm" href="#">

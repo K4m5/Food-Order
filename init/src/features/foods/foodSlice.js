@@ -14,7 +14,6 @@ export const fetchFoods = createAsyncThunk(
       }
       const response = await baseApi.get(`/foods?page=${page}&limit=${limit}`);
       console.log(response.data);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);

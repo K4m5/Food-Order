@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { VscArrowRight } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userProfile, userUpdate } from "../../../features/user/userSlice";
+import { logout } from "../../../features/auth/authSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
   const token = localStorage.getItem("accessToken");
 
@@ -36,6 +38,12 @@ const Profile = () => {
   const onSubmit = (data) => {
     dispatch(userUpdate({ data }));
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   if (!token) {
     return (
       <div
@@ -165,21 +173,12 @@ const Profile = () => {
             </div>
           </form>
         </div>
-        <div className="additional">
+        <div className="additional d-lg-none">
           <div className="change_password my-3">
             <Link
-              to="/forgot_password"
-              className="p-3 border rounded bg-white btn d-flex"
+              className="p-3 border rounded bg-white btn d-flex" onClick={handleLogout}
             >
-              Thay đổi mật khẩu
-              <span className="ml-auto">
-                <VscArrowRight />
-              </span>
-            </Link>
-          </div>
-          <div className="deactivate_account">
-            <Link to="#" className="p-3 border rounded bg-white btn d-flex">
-              Vô hiệu hóa tài khoản
+              Đăng xuất
               <span className="ml-auto">
                 <VscArrowRight />
               </span>
