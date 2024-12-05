@@ -19,8 +19,11 @@ import {
 } from "../../features/order/orderSlice";
 import { formatMoney } from "../../utils/formatMoney";
 import { fetchOrderCoordinates } from "../../utils/getLongLat";
+import { fetchCouponById } from "../../features/coupons/couponSlice";
+
 const Map = () => {
   const { orders, order } = useSelector((state) => state.orders);
+  const { coupon } = useSelector((state) => state.coupons);
   const dispatch = useDispatch();
   const [ordersWithCoordinates, setOrdersWithCoordinates] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(false);
@@ -41,6 +44,13 @@ const Map = () => {
 
     fetchCoordinates();
   }, [orders]);
+  
+  useEffect(() => {
+    if (order?.order?.coupon) {
+      dispatch(fetchCouponById(order.order.coupon));
+    }
+  }, [dispatch, order?.order?.coupon]);
+
   const customIcon = L.icon({
     iconUrl: "/icon.png",
     iconSize: [32, 32], // size of the icon
@@ -198,12 +208,32 @@ const Map = () => {
                                     {formatMoney(topping.price)}
                                   </p>
                                 </div>
+                                
                               </div>
                             ))}
                           </Fragment>
                         ))}
                       </div>
                       <div className="p-3 bg-white">
+                      <div className="d-flex align-items-center mb-2">
+                          <h6 className="font-weight-bold mb-1">Mã giảm giá</h6>
+                          <h6 className="font-weight-bold ml-auto mb-1">
+                          {coupon ? (
+                            <div className="gold-members d-flex align-items-center justify-content-between py-2 border-bottom">
+                              <div className="media align-items-center">
+                                <div className="active">
+                                  <p className="m-0 pr-2"> {coupon?.code}:</p>
+                                </div>
+                              </div>
+                              <div>
+                                 {coupon.value}%
+                              </div>
+                            </div>
+                          ) : (
+                            <p className="font-weight-bold mb-1">Không áp dụng mã giảm giá</p>
+                          )}
+                          </h6>
+                        </div>
                         <div className="d-flex align-items-center mb-2">
                           <h6 className="font-weight-bold mb-1">Phương thức</h6>
                           <h6 className="font-weight-bold ml-auto mb-1">
