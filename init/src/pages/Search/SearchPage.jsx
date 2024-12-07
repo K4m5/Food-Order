@@ -56,24 +56,6 @@ const SearchPage = () => {
                 </div>
               </div>
             </div>
-
-            <ul className="nav nav-tabs border-0" id="myTab" role="tablist">
-              <li className="nav-item" role="presentation">
-                <a
-                  className="nav-link active"
-                  id="home-tab"
-                  data-toggle="tab"
-                  href="#home"
-                  role="tab"
-                  aria-controls="home"
-                  aria-selected="true"
-                >
-                  Tất cả
-                </a>
-              </li>
-              {/* Thêm các tab khác nếu cần */}
-            </ul>
-
             <div className="tab-content mt-2" id="myTabContent">
               <div
                 className="tab-pane fade show active"
@@ -89,7 +71,7 @@ const SearchPage = () => {
                   )}
                   {searchStatus === "succeeded" &&
                     filterFoods.map((food) => (
-                      <div className="col-md-4" key={food.id}>
+                      <div className="col-md-4" key={food?._id}>
                         <ProductItem food={food} />
                       </div>
                     ))}
@@ -139,7 +121,6 @@ const SearchPage = () => {
               </div>
             </div>
               </div>
-              {/* Thêm các tab content khác nếu cần */}
             </div>
           </div>
         </div>

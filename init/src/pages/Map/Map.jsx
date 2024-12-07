@@ -226,7 +226,7 @@ const Map = () => {
                                 </div>
                               </div>
                               <div>
-                                 {coupon.value}%
+                                 Giảm {coupon.value}%
                               </div>
                             </div>
                           ) : (

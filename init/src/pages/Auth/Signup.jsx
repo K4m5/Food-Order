@@ -27,8 +27,6 @@ const Signup = () => {
   return (
     <>
       <div className="px-5 col-10 mx-auto">
-        <h2 className="text-dark my-0">Xin chào</h2>
-        <p className="text-50">Tiếp tục đăng ký</p>
         <form className="mt-5 mb-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="fullname" className="text-dark">
