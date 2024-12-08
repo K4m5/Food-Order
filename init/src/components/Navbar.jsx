@@ -22,18 +22,18 @@ const Navbar = () => {
         <ul className="second-nav">
           <li>
             <Link to="">
-              <i className="feather-home mr-2"></i> Trang chủ
+              <i className="mr-2"></i> Trang chủ
             </Link>
           </li>
           <li>
             <Link to="my_order">
-              <i className="feather-list mr-2"></i> Đơn hàng của tôi
+              <i className="mr-2"></i> Đơn hàng của tôi
             </Link>
           </li>
           {token ? (
             <li>
-              <Link to="#">
-                <i className="feather-user mr-2"></i> Người dùng
+              <Link to="profile">
+                <i className="mr-2"></i> Người dùng
               </Link>
               <ul>
                 <li>
