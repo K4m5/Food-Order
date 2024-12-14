@@ -63,8 +63,7 @@ const Map = () => {
     iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
     popupAnchor: [0, -32], // point from which the popup should open relative to the iconAnchor
   });
-  const center = [20.980838, 105.789948];
-
+  const center = [20.981916689386782, 105.80122157476806];
   const handleMarkerClick = (id) => {
     setSelectedOrder(true);
     dispatch(fetchDetailsOrder(id));

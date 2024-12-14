@@ -33,6 +33,7 @@ const Header = () => {
     dispatch(logout());
     navigate("/login");
   };
+  // Tự động lấy tọa độ khi bật trình duyệt
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -86,7 +87,7 @@ const Header = () => {
   });
   return (
     <>
-      <header className="section-header  ">
+      <header className="section-header">
         <section className="header-main shadow-sm bg-white py-3">
           <div className="container">
             <div className="row align-items-center">

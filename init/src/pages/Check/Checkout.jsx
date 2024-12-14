@@ -326,8 +326,8 @@ function Checkout() {
       if (data && data.length > 0) {
         const { lat, lon } = data[0]; // Lấy tọa độ đầu tiên từ kết quả
 
-        const storeLat = 20.983156797142108; // Tọa độ cửa hàng
-        const storeLon = 105.80294680731643;
+        const storeLat = 20.981916689386782; // Tọa độ cửa hàng
+        const storeLon = 105.80122157476806;
         const customerLat = lat; // Tọa độ khách hàng
         const customerLon = lon;
 

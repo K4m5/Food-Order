@@ -6,7 +6,6 @@ export const fetchCoupons = createAsyncThunk(
   "coupons/fetchCoupons",
   async ({ page, limit }, { rejectWithValue }) => {
     try {
-      console.log("hihi");
       if (!page) {
         page = 1;
       }
