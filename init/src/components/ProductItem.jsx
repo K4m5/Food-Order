@@ -29,7 +29,7 @@ const ProductItem = ({ food }) => {
 
             <p className="text-gray mb-3 time d-flex justify-content-between algin-items-center">
               <span
-                className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2 d-flex   justify-content-start align-items-center"
+                className="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2 d-flex justify-content-start align-items-center"
                 style={{ gap: "5px" }}
               >
                 <FaRegClock className="feather-clock mr-1" size={16} />

@@ -253,7 +253,7 @@ function Checkout() {
       // Fetch districts based on selected province
       axios
         .get(
-          `https://vapi.vnappmob.com/api/province/district/${selectedProvince}`
+          `https://vapi.vnappmob.com/api/v2/province/district/${selectedProvince}`
         )
         .then((response) => {
           const filteredDistricts = response.data.results.filter(item => item.district_type !== "Huyện" && item.district_type !== "Thị xã");
@@ -266,7 +266,7 @@ function Checkout() {
   useEffect(() => {
     if (selectedDistrict) {
       axios
-        .get(`https://vapi.vnappmob.com/api/province/ward/${selectedDistrict}`)
+        .get(`https://vapi.vnappmob.com/api/v2/province/ward/${selectedDistrict}`)
         .then((response) => {
           setWards(response.data.results);
         });

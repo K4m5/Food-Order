@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa";
 import BannerMain from "../../components/BannerMain";
 import CategoryMain from "../../components/CategoryMain";
 import ProductMain from "../../components/ProductMain";
+import FoodCategory from "../../components/FoodCategory";
 import { SidebarContext } from "../../context/SidebarContext";
 const Home = () => {
   const { toggleSidebar } = useContext(SidebarContext);
@@ -21,6 +22,7 @@ const Home = () => {
       <BannerMain />
       <div className="container">
         <ProductMain />
+        <FoodCategory />
       </div>
     </div>
   );
