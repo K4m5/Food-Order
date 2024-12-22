@@ -9,7 +9,6 @@ const MyOrder = () => {
   const activeTab = useSelector((state) => state.tab.activeTab);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("fetchOrders");
     dispatch(fetchOrders({ page: currentPage, limit: 100 }));
   }, [currentPage, dispatch]);
   if (!orders || orders.length === 0) {

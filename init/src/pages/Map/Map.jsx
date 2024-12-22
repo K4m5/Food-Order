@@ -215,7 +215,13 @@ const Map = () => {
                         ))}
                       </div>
                       <div className="p-3 bg-white">
-                      <div className="d-flex align-items-center mb-2">
+                        <div className="d-flex align-items-center mb-2">
+                          <h6 className="font-weight-bold mb-1">Trạng thái đơn hàng</h6>
+                          <h6 className="font-weight-bold ml-auto mb-1">
+                            {order?.order?.status === "Pending" ? "Đang chờ" : "Đang xử lí"}
+                          </h6>
+                        </div>
+                        <div className="d-flex align-items-center mb-2">
                           <h6 className="font-weight-bold mb-1">Mã giảm giá</h6>
                           <h6 className="font-weight-bold ml-auto mb-1">
                           {coupon ? (
