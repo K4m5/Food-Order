@@ -36,7 +36,8 @@ export const fetchFoodByCategory = createAsyncThunk(
       const response = await baseApi.get(
         `/categories/${id}/foods?page=${page}&limit=${limit}`
       );
-      return response.data;
+      console.log(response.data)
+      return response.data;z
     } catch (error) {
       return rejectWithValue(error.response.data);
     }

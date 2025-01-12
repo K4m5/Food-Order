@@ -39,6 +39,7 @@ const Map = () => {
         (order) => order.status === "Pending" || order.status === "Processing"
       );
       const result = await fetchOrderCoordinates(filteredOrders);
+      console.log(result)
       setOrdersWithCoordinates(result);
     };
 
@@ -126,7 +127,7 @@ const Map = () => {
                 >
                   <Popup>
                     <div>
-                      <p>{order.name}</p>
+                      <p>Mã đơn hàng: {order.code}</p>
                       <p>{order.address}</p>
                     </div>
                   </Popup>

@@ -14,7 +14,7 @@ import {
   updateCartItem,
 } from "../../features/cart/cartSlice";
 import { fetchCoupons } from "../../features/coupons/couponSlice";
-import { createOrder, createOrderVnpay  } from "../../features/order/orderSlice";
+import { createOrder, createOrderVnpay } from "../../features/order/orderSlice";
 import { formatMoney } from "../../utils/formatMoney";
 
 
@@ -35,7 +35,7 @@ const generateOrderId = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let orderId = '';
   for (let i = 0; i < 14; i++) {
-      orderId += chars.charAt(Math.floor(Math.random() * chars.length));
+    orderId += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return orderId;
 };
@@ -90,12 +90,12 @@ function Checkout() {
     checkAuth();
 
     const checkAndRemoveQuery = async () => {
-      const params = new URLSearchParams(location.search); 
-      const vnp_ResponseCode = params.get("vnp_ResponseCode"); 
+      const params = new URLSearchParams(location.search);
+      const vnp_ResponseCode = params.get("vnp_ResponseCode");
 
       if (vnp_ResponseCode && vnp_ResponseCode !== "00") {
         navigate(location.pathname, { replace: true });
-      }else if (vnp_ResponseCode && vnp_ResponseCode == "00"){
+      } else if (vnp_ResponseCode && vnp_ResponseCode == "00") {
         const orderData = {
           phone: params.get("phone"),
           address: params.get("address"),
@@ -119,7 +119,7 @@ function Checkout() {
       toast.error("Số lượng phải lớn hơn 0");
     }
   };
-  // random code
+
   const handleApplyDiscount = () => {
     // kiểm tra xem có mã giảm giá nào được nhập không
     // nếu không thì thông báo lỗi
@@ -171,7 +171,7 @@ function Checkout() {
     return total;
   };
 
-  
+
   const handleChange = (event) => {
     setSelectedBank(event.target.value);
   };
@@ -214,15 +214,15 @@ function Checkout() {
         timeShip: timeShip,
       };
 
-      if(selectedBank == "" || !selectedBank){
+      if (selectedBank == "" || !selectedBank) {
         await dispatch(createOrder(orderData)).unwrap();
         navigate("/orderSuccess");
-      }else{
+      } else {
         const vnpayUrl = await dispatch(createOrderVnpay(
           {
-            amount: calculateTotal(), 
-            orderId: generateOrderId(), 
-            bankCode: "NCB", 
+            amount: calculateTotal(),
+            orderId: generateOrderId(),
+            bankCode: "",
             coupon: discountCode,
             ship: phiShip,
             distance: distanceShip,
@@ -268,6 +268,7 @@ function Checkout() {
       axios
         .get(`https://vapi.vnappmob.com/api/v2/province/ward/${selectedDistrict}`)
         .then((response) => {
+          console.log(response.data.results)
           setWards(response.data.results);
         });
     }
@@ -304,6 +305,7 @@ function Checkout() {
   }
 
   const handelChonPhuong = async (e) => {
+    console.log(e.target.value)
     setSelectedWard(e.target.value)
 
     let addressShip = wards.find((ward) => ward.ward_id == e.target.value).ward_name +
@@ -377,7 +379,7 @@ function Checkout() {
                   <div className="d-flex flex-column">
                     <h6 className="mb-3 font-weight-bold">Địa chỉ giao hàng</h6>
                     <div className="row">
-                      {/* danh sasch tinh thanh pho */}
+                      {/* danh sach tinh thanh pho */}
 
                       <div className="col-md-4 mb-3">
                         <label htmlFor="district">Địa Chỉ Quận</label>
@@ -443,124 +445,7 @@ function Checkout() {
                   </div>
                 </div>
               </div>
-              <div
-                className="accordion mb-3 rounded shadow-sm bg-white overflow-hidden"
-                id="accordionExample"
-              >
-                <div className="osahan-card bg-white overflow-hidden">
-                  <div className="osahan-card-header" id="headingThree">
-                    <h2 className="mb-0">
-                      <button
-                        className="d-flex p-3 align-items-center btn btn-link w-100"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#collapseThree"
-                        aria-expanded="false"
-                        aria-controls="collapseThree"
-                      >
-                        <CiDollar
-                          style={{
-                            marginRight: "1rem",
-                          }}
-                          size={20}
-                        />
-                        Tiền mặt khi giao hàng
-                        <FaAnglesDown
-                          style={{
-                            marginLeft: "auto",
-                          }}
-                        />
-                      </button>
-                    </h2>
-                  </div>
-                  <div
-                    id="collapseThree"
-                    className="collapse"
-                    aria-labelledby="headingThree"
-                    data-parent="#accordionExample"
-                  >
-                    <div className="border-top p-3 osahan-card-body">
-                      <h6 className="mb-3 font-weight-bold">Tiền mặt</h6>
-                      <p className="m-0">
-                        Vui lòng giữ sẵn số tiền lẻ chính xác để giúp chúng tôi
-                        phục vụ bạn tốt hơn
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="accordion mb-3 rounded shadow-sm bg-white overflow-hidden"
-                id="accordionExample"
-              >
-                <div className="osahan-card bg-white overflow-hidden">
-                  <div className="osahan-card-header" id="headingThree">
-                    <h2 className="mb-0">
-                      <button
-                        className="d-flex p-3 align-items-center btn btn-link w-100"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#collapseThree2"
-                        aria-expanded="false"
-                        aria-controls="collapseThree2"
-                      >
-                        <CiDollar
-                          style={{
-                            marginRight: "1rem",
-                          }}
-                          size={20}
-                        />
-                        Chuyển khoản ngân hàng
-                        <FaAnglesDown
-                          style={{
-                            marginLeft: "auto",
-                          }}
-                        />
-                      </button>
-                    </h2>
-                  </div>
-                  <div
-                    id="collapseThree2"
-                    className="collapse"
-                    aria-labelledby="headingThree"
-                    data-parent="#accordionExample"
-                  >
-                    <div className="border-top p-3 osahan-card-body">
-                      <h6 className="mb-3 font-weight-bold">Ngân Hàng</h6>
-                      <p className="m-0">
-                        Hệ thống sẽ thực hiện thanh toán cho bạn chính xác số tiền của đơn hàng.
-                      </p>
-                    </div>
-                    <div className="border-top p-3 osahan-card-body">
-                      <select className="form-control" value={selectedBank} onChange={handleChange}>
-                        <option value=""> Chọn Ngân Hàng</option>
-                        <option value="NCB"> Ngân Hàng NCB</option>
-                        <option value="AGRIBANK"> Ngân Hàng Agribank</option>
-                        <option value="SCB"> Ngân Hàng SCB</option>
-                        <option value="SACOMBANK">Ngân Hàng SacomBank</option>
-                        <option value="EXIMBANK"> Ngân Hàng EximBank</option>
-                        <option value="MSBANK"> Ngân Hàng MSBANK</option>
-                        <option value="NAMABANK"> Ngân Hàng NamABank</option>
-                        <option value="VNMART"> Vi Điện Tử VnMart</option>
-                        <option value="VIETINBANK">Ngân Hàng Vietinbank</option>
-                        <option value="VIETCOMBANK"> Ngân Hàng VCB</option>
-                        <option value="HDBANK">Ngân Hàng HDBank</option>
-                        <option value="DONGABANK"> Ngân Hàng Đông A</option>
-                        <option value="TPBANK"> Ngân Hàng TPBank</option>
-                        <option value="OJB"> Ngân Hàng OceanBank</option>
-                        <option value="BIDV"> Ngân Hàng BIDV</option>
-                        <option value="TECHCOMBANK"> Ngân Hàng Techcombank</option>
-                        <option value="VPBANK"> Ngân Hàng VPBank</option>
-                        <option value="MBBANK"> Ngân Hàng MBBank</option>
-                        <option value="ACB"> Ngân Hàng ACB</option>
-                        <option value="OCB"> Ngân Hàng OCB</option>
-                        <option value="IVB"> Ngân Hàng IVB</option>
-                        <option value="VISA"> Thanh toán qua VISA/MASTER</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
           <div className={calculateTotal() != 0 ? "col-md-4" : "col-md-12"}>
@@ -707,6 +592,42 @@ function Checkout() {
                           {formatMoney(calculateTotal() + phiShip)}
                         </span>
                       </h6>
+                      <div className="form-group mt-3">
+                        {/* 2 radio button  */}
+                        <div className="form-check flex items-center justify-center">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="payment"
+                            id="cash"
+                            value="cash"
+                            checked={selectedBank === ""}
+                            onChange={
+                              () => { setSelectedBank("") }
+                            }
+                          />
+                          <label className="form-check-label" htmlFor="cash">
+                            Thanh toán khi nhận hàng
+                          </label>
+
+                        </div>
+                        <div className="form-check flex items-center justify-center mt-2">
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="payment"
+                            id="vnpay"
+                            value="vnpay"
+                            checked={selectedBank === "vnpay"}
+                            onChange={() => {
+                              setSelectedBank("vnpay")
+                            }}
+                          />
+                          <label className="form-check-label" htmlFor="vnpay">
+                            Thanh toán qua VNPay
+                          </label>
+                        </div>
+                      </div>
                     </div>
                     <div className="p-3">
                       <button

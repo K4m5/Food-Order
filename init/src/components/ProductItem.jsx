@@ -41,9 +41,6 @@ const ProductItem = ({ food }) => {
               </span>
             </p>
           </div>
-          <div className="list-card-badge">
-            <small>{food?.category?.name}</small>
-          </div>
           <p>Đã bán {food?.sold}</p>
         </div>
       </div>
