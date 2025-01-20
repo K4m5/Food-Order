@@ -49,7 +49,7 @@ function Checkout() {
   const [loading, setLoading] = useState(false);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState("01");
+  const [selectedProvince, setSelectedProvince] = useState("1");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedWard, setSelectedWard] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
@@ -202,10 +202,10 @@ function Checkout() {
         address:
           homeAddress +
           ", " +
-          wards.find((ward) => ward.ward_id == selectedWard).ward_name +
+          wards.find((ward) => ward.code == selectedWard).name +
           ", " +
-          districts.find((district) => district.district_id == selectedDistrict)
-            .district_name +
+          districts.find((district) => district.code == selectedDistrict)
+            .name +
           ", " +
           " Tỉnh Hà Nội",
         coupon: discountCode,
@@ -230,11 +230,11 @@ function Checkout() {
             address:
               homeAddress +
               ", " +
-              wards.find((ward) => ward.ward_id == selectedWard).ward_name +
+              wards.find((ward) => ward.code == selectedWard).name +
               ", " +
-              districts.find((district) => district.district_id == selectedDistrict)
-                .district_name +
-              ", " +
+              districts.find((district) => district.code == selectedDistrict)
+                .name +
+              "," +
               " Tỉnh Hà Nội",
             phone,
           }
@@ -253,10 +253,10 @@ function Checkout() {
       // Fetch districts based on selected province
       axios
         .get(
-          `https://vapi.vnappmob.com/api/v2/province/district/${selectedProvince}`
+          `https://provinces.open-api.vn/api/p/${selectedProvince}/?depth=2`
         )
         .then((response) => {
-          const filteredDistricts = response.data.results.filter(item => item.district_type !== "Huyện" && item.district_type !== "Thị xã");
+          const filteredDistricts = response.data.districts.filter(item => item.name !== "Huyện" && item.name !== "Thị xã");
           setDistricts(filteredDistricts);
           setWards([]); // Reset wards when province changes
         });
@@ -266,10 +266,10 @@ function Checkout() {
   useEffect(() => {
     if (selectedDistrict) {
       axios
-        .get(`https://vapi.vnappmob.com/api/v2/province/ward/${selectedDistrict}`)
+        .get(`https://provinces.open-api.vn/api/d/${selectedDistrict}?depth=2`)
         .then((response) => {
-          console.log(response.data.results)
-          setWards(response.data.results);
+          console.log(response.data.wards)
+          setWards(response.data.wards);
         });
     }
   }, [selectedDistrict]);
@@ -308,10 +308,10 @@ function Checkout() {
     console.log(e.target.value)
     setSelectedWard(e.target.value)
 
-    let addressShip = wards.find((ward) => ward.ward_id == e.target.value).ward_name +
+    let addressShip = wards.find((ward) => ward.code == e.target.value).name +
       ", " +
-      districts.find((district) => district.district_id == selectedDistrict)
-        .district_name +
+      districts.find((district) => district.code == selectedDistrict)
+        .name +
       "," +
       " Hà Nội";
 
@@ -393,10 +393,10 @@ function Checkout() {
                           <option value="">Chọn Địa Chỉ</option>
                           {districts.map((district) => (
                             <option
-                              key={district.district_id}
-                              value={district.district_id}
+                              key={district.code}
+                              value={district.code}
                             >
-                              {district.district_name}
+                              {district.name}
                             </option>
                           ))}
                         </select>
@@ -412,8 +412,8 @@ function Checkout() {
                         >
                           <option value="">Chọn Địa Chỉ</option>
                           {wards.map((ward) => (
-                            <option key={ward.ward_id} value={ward.ward_id}>
-                              {ward.ward_name}
+                            <option key={ward.code} value={ward.code}>
+                              {ward.name}
                             </option>
                           ))}
                         </select>
